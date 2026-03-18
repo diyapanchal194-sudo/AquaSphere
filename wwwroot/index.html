@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AquaSphere - Dive into Excellence</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="/" class="nav-logo">
+        <svg class="logo-icon" width="28" height="18" viewBox="0 0 28 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M2 5C5 2 8 8 11 5C14 2 17 8 20 5C23 2 26 8 26 5" stroke="#2563EB" stroke-width="2.5" stroke-linecap="round"/>
+          <path d="M2 11C5 8 8 14 11 11C14 8 17 14 20 11C23 8 26 14 26 11" stroke="#2563EB" stroke-width="2.5" stroke-linecap="round"/>
+          <path d="M2 17C5 14 8 20 11 17C14 14 17 20 20 17C23 14 26 20 26 17" stroke="#2563EB" stroke-width="2.5" stroke-linecap="round"/>
+        </svg>
+        <span class="logo-text">AquaSphere</span>
+      </a>
+
+      <ul class="nav-links">
+        <li>
+          <a href="/" class="nav-link active">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
+            </svg>
+            Home
+          </a>
+        </li>
+        <li>
+          <a href="#" class="nav-link">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/>
+            </svg>
+            Locations
+          </a>
+        </li>
+      </ul>
+
+      <div class="nav-actions">
+        <button class="btn-portal" onclick="window.location.href='auth-staff-login.html'">Staff Access</button>
+        <button class="btn-portal" onclick="window.location.href='auth-admin-login.html'">Admin Control</button>
+        <button class="btn-signin" onclick="window.location.href='auth-member-login.html'">Sign In</button>
+      </div>
+
+      <button class="nav-hamburger" id="hamburgerBtn" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="/" class="mobile-link active">Home</a>
+      <a href="#" class="mobile-link">Locations</a>
+      <a href="#" class="mobile-link">Staff Access</a>
+      <a href="#" class="mobile-link">Admin Control</a>
+      <a href="#" class="mobile-link mobile-signin">Sign In</a>
+    </div>
+  </nav>
+
+  <!-- HERO SECTION -->
+  <section class="hero" id="home">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <h1 class="hero-title">
+        Dive into <span class="hero-highlight">Excellence.</span>
+      </h1>
+      <p class="hero-subtitle">
+        Experience the crystal-clear waters and luxurious amenities of<br />
+        AquaSphere. Your journey to wellness begins with one dive.
+      </p>
+      <div class="hero-buttons">
+        <button class="btn-primary hero-btn" onclick="scrollToSection('locations')">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/>
+          </svg>
+          Find Nearest Pool
+        </button>
+        <button class="btn-secondary hero-btn" onclick="scrollToSection('locations')">
+          Browse Locations
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES SECTION -->
+  <section class="features" id="features">
+    <div class="container">
+      <div class="features-grid">
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="1.8">
+              <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+            </svg>
+          </div>
+          <h3 class="feature-title">Premium Quality</h3>
+          <p class="feature-text">State-of-the-art filtration systems and temperature-controlled waters.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="1.8">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            </svg>
+          </div>
+          <h3 class="feature-title">Secure &amp; Clean</h3>
+          <p class="feature-text">Daily maintenance and 24/7 security for your peace of mind.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="1.8">
+              <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+            </svg>
+          </div>
+          <h3 class="feature-title">Flexible Hours</h3>
+          <p class="feature-text">Open from 5 AM to 11 PM to fit your busy lifestyle seamlessly.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- LOCATIONS / MAP SECTION -->
+  <section class="locations-section" id="locations">
+    <div class="container">
+      <div class="locations-layout">
+
+        <div class="locations-left">
+          <h2 class="section-title">
+            Find your nearest<br />
+            <span class="section-title-blue">AquaSphere.</span>
+          </h2>
+          <p class="section-subtitle">
+            Access our world-class facilities at any of our 10 flagship UK locations.
+          </p>
+          <button class="btn-use-location" id="useLocationBtn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2">
+              <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/>
+            </svg>
+            Use my current location
+          </button>
+
+          <div class="locations-list" id="locationsList">
+            <div class="location-item active" data-lat="51.5085" data-lng="-0.0218">
+              <div class="location-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/>
+                </svg>
+              </div>
+              <div class="location-info">
+                <h4>AquaSphere London Royal Docks</h4>
+                <p>Royal Docks, London E16 1AH, UK</p>
+                <div class="location-tags">
+                  <span class="tag">HERITAGE SITE</span>
+                  <span class="tag">WATERFRONT DECK</span>
+                  <span class="tag">MASSAGE</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="location-item" data-lat="53.3811" data-lng="-2.9978">
+              <div class="location-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#6B7280" stroke-width="2">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/>
+                </svg>
+              </div>
+              <div class="location-info">
+                <h4>AquaSphere Liverpool Albert Dock</h4>
+                <p>Albert Dock, Liverpool L3 4AF, UK</p>
+                <div class="location-tags">
+                  <span class="tag">HERITAGE SITE</span>
+                  <span class="tag">WATERFRONT DECK</span>
+                  <span class="tag">MASSAGE</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="location-item" data-lat="53.3808" data-lng="-1.4703">
+              <div class="location-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#6B7280" stroke-width="2">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/>
+                </svg>
+              </div>
+              <div class="location-info">
+                <h4>AquaSphere Sheffield Peak</h4>
+                <p>Sheffield City Centre, Sheffield S1 2BP, UK</p>
+                <div class="location-tags">
+                  <span class="tag">ECO-FRIENDLY</span>
+                  <span class="tag">RAINWATER HARVESTING</span>
+                  <span class="tag">FAMILY FUN</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="location-item" data-lat="51.4641" data-lng="-3.1650">
+              <div class="location-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#6B7280" stroke-width="2">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/>
+                </svg>
+              </div>
+              <div class="location-info">
+                <h4>AquaSphere Cardiff Bay</h4>
+                <p>Cardiff Bay, Cardiff CF10 5AN, UK</p>
+                <div class="location-tags">
+                  <span class="tag">BAY VIEWS</span>
+                  <span class="tag">SMART LOCKERS</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="locations-right">
+          <div class="map-container">
+            <iframe
+              id="mapFrame"
+              class="map-iframe"
+              src="https://maps.google.com/maps?q=Royal+Docks+London+E16+1AH&output=embed&z=14"
+              allowfullscreen
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              title="AquaSphere Location Map">
+            </iframe>
+            <button class="map-directions-btn" id="directionsBtn" onclick="openDirections()">
+              Get Directions
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- MEMBERSHIP PLANS SECTION -->
+  <section class="membership" id="membership">
+    <div class="container">
+      <div class="membership-header">
+        <h2 class="membership-title">Membership Plans</h2>
+        <p class="membership-location" id="membershipLocation">LOCATION: AQUASPHERE LONDON ROYAL DOCKS</p>
+        <p class="membership-subtitle">Choose the perfect tier for your swimming goals. Pricing is adjusted based on your selected facility.</p>
+      </div>
+
+      <div class="plans-grid">
+
+        <div class="plan-card">
+          <h3 class="plan-name">Starter</h3>
+          <div class="plan-price">
+            <span class="price-currency">£</span>
+            <span class="price-amount">74</span>
+            <span class="price-period">/month</span>
+          </div>
+          <ul class="plan-features">
+            <li><span class="check-icon">&#10003;</span> 3 Visits/week</li>
+            <li><span class="check-icon">&#10003;</span> Basic locker access</li>
+            <li><span class="check-icon">&#10003;</span> Weekend access</li>
+            <li><span class="check-icon">&#10003;</span> Free towels</li>
+          </ul>
+          <button class="plan-btn plan-btn-outline" id="joinStarterBtn">Join Docks</button>
+        </div>
+
+        <div class="plan-card plan-card-featured">
+          <div class="plan-badge">POPULAR</div>
+          <h3 class="plan-name">Pro Member</h3>
+          <div class="plan-price">
+            <span class="price-currency">£</span>
+            <span class="price-amount">149</span>
+            <span class="price-period">/month</span>
+          </div>
+          <ul class="plan-features">
+            <li><span class="check-icon check-blue">&#10003;</span> Unlimited visits</li>
+            <li><span class="check-icon check-blue">&#10003;</span> Private lockers</li>
+            <li><span class="check-icon check-blue">&#10003;</span> Free guest passes (2/month)</li>
+            <li><span class="check-icon check-blue">&#10003;</span> Premium sauna access</li>
+            <li><span class="check-icon check-blue">&#10003;</span> Priority lane access</li>
+          </ul>
+          <button class="plan-btn plan-btn-primary" id="joinProBtn">Join Docks</button>
+        </div>
+
+        <div class="plan-card">
+          <h3 class="plan-name">Elite Club</h3>
+          <div class="plan-price">
+            <span class="price-currency">£</span>
+            <span class="price-amount">299</span>
+            <span class="price-period">/month</span>
+          </div>
+          <ul class="plan-features">
+            <li><span class="check-icon">&#10003;</span> All Pro benefits</li>
+            <li><span class="check-icon">&#10003;</span> Personal trainer (4/month)</li>
+            <li><span class="check-icon">&#10003;</span> Complimentary massage</li>
+            <li><span class="check-icon">&#10003;</span> Exclusive VIP lounge</li>
+            <li><span class="check-icon">&#10003;</span> Free entry for family</li>
+          </ul>
+          <button class="plan-btn plan-btn-outline" id="joinEliteBtn">Join Docks</button>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS SECTION -->
+  <section class="testimonials" id="testimonials">
+    <div class="container">
+      <div class="testimonial-layout">
+
+        <div class="testimonial-image-wrap">
+          <img
+            src="https://images.unsplash.com/photo-1519315901367-f34ff9154487?w=500&q=80"
+            alt="Crystal clear pool water"
+            class="testimonial-image"
+          />
+        </div>
+
+        <div class="testimonial-content">
+          <div class="testimonial-label">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="#2563EB">
+              <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+            </svg>
+            TESTIMONIALS
+          </div>
+          <blockquote class="testimonial-quote" id="testimonialQuote">
+            "The best pool membership in the city. Crystal clear and never crowded."
+          </blockquote>
+          <div class="testimonial-author">
+            <img
+              src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=60&q=80"
+              alt="Sarah Jenkins"
+              class="author-avatar"
+            />
+            <div class="author-info">
+              <span class="author-name" id="authorName">Sarah Jenkins</span>
+              <span class="author-role" id="authorRole">Elite Member for 2 years</span>
+            </div>
+          </div>
+          <div class="testimonial-dots">
+            <span class="dot dot-active" onclick="changeTestimonial(0)"></span>
+            <span class="dot" onclick="changeTestimonial(1)"></span>
+            <span class="dot" onclick="changeTestimonial(2)"></span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA SECTION -->
+  <section class="cta-section">
+    <div class="container">
+      <div class="cta-box">
+        <h2 class="cta-title">Ready to make a splash?</h2>
+        <p class="cta-subtitle">
+          Join over 5,000 members enjoying premium swimming facilities and world-class training.
+        </p>
+        <button class="btn-cta" onclick="window.location.href='#'">Create Free Account</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-top">
+
+        <div class="footer-brand">
+          <a href="/" class="nav-logo footer-logo">
+            <svg class="logo-icon" width="28" height="18" viewBox="0 0 28 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M2 5C5 2 8 8 11 5C14 2 17 8 20 5C23 2 26 8 26 5" stroke="#2563EB" stroke-width="2.5" stroke-linecap="round"/>
+              <path d="M2 11C5 8 8 14 11 11C14 8 17 14 20 11C23 8 26 14 26 11" stroke="#2563EB" stroke-width="2.5" stroke-linecap="round"/>
+              <path d="M2 17C5 14 8 20 11 17C14 14 17 20 20 17C23 14 26 20 26 17" stroke="#2563EB" stroke-width="2.5" stroke-linecap="round"/>
+            </svg>
+            <span class="logo-text">AquaSphere</span>
+          </a>
+          <p class="footer-desc">
+            Luxury swimming experiences for enthusiasts and families. Dive into excellence with our exclusive membership plans.
+          </p>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-heading">Portals</h4>
+          <ul class="footer-links">
+            <li><a href="#">Join Now</a></li>
+            <li><a href="#">Staff Portal</a></li>
+            <li><a href="#">Admin Dashboard</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-heading">Contact</h4>
+          <ul class="footer-links">
+            <li>123 Pool Side, Marina</li>
+            <li><a href="mailto:contact@aquasphere.com">contact@aquasphere.com</a></li>
+            <li>+1 (555) 000-1111</li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2026 AquaSphere Club. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

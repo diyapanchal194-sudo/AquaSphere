@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Staff Access - AquaSphere</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="auth.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="/" class="nav-logo">
+        <svg class="logo-icon" width="28" height="18" viewBox="0 0 28 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M2 5C5 2 8 8 11 5C14 2 17 8 20 5C23 2 26 8 26 5" stroke="#2563EB" stroke-width="2.5" stroke-linecap="round"/>
+          <path d="M2 11C5 8 8 14 11 11C14 8 17 14 20 11C23 8 26 14 26 11" stroke="#2563EB" stroke-width="2.5" stroke-linecap="round"/>
+          <path d="M2 17C5 14 8 20 11 17C14 14 17 20 20 17C23 14 26 20 26 17" stroke="#2563EB" stroke-width="2.5" stroke-linecap="round"/>
+        </svg>
+        <span class="logo-text">AquaSphere</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="/" class="nav-link">Home</a></li>
+        <li><a href="#" class="nav-link">Locations</a></li>
+      </ul>
+      <div class="nav-actions">
+        <button class="btn-portal">Staff Access</button>
+        <button class="btn-portal">Admin Control</button>
+        <button class="btn-signin" onclick="window.location.href='auth-member-login.html'">Sign In</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- AUTH CONTAINER -->
+  <div class="auth-container auth-light">
+    <div class="auth-card">
+      <div class="auth-badge">ADMIN</div>
+      
+      <div class="auth-icon-wrapper">
+        <div class="auth-icon">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M20 7l-1.35-1.35a2 2 0 00-2.83 0L6 16.82a2 2 0 00-.5 2.23L4 20l1.95-.5a2 2 0 002.23-.5L20 9.83a2 2 0 000-2.83z"/><line x1="9" y1="4" x2="4" y2="9"/><line x1="12" y1="2" x2="7" y2="7"/>
+          </svg>
+        </div>
+      </div>
+
+      <h1 class="auth-title">Staff Access</h1>
+      <p class="auth-subtitle">Manage your shifts and facility requests.</p>
+
+      <form class="auth-form" id="staffLoginForm">
+        <div class="form-group">
+          <label for="workEmail" class="form-label">WORK EMAIL</label>
+          <div class="form-input-wrapper">
+            <svg class="form-input-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 01-2.06 0L2 7"/>
+            </svg>
+            <input type="email" id="workEmail" name="email" placeholder="yourname@staff.com" class="form-input" required />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="staffPassword" class="form-label">PASSWORD</label>
+          <div class="form-input-wrapper">
+            <svg class="form-input-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/>
+            </svg>
+            <input type="password" id="staffPassword" name="password" placeholder="•••••••" class="form-input" required />
+          </div>
+        </div>
+
+        <button type="submit" class="auth-submit-btn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M15 3H9a6 6 0 00-6 6v0a6 6 0 006 6h4m0 0v3m0-3L9 16m6 0l3 3m-3-3H3"/>
+          </svg>
+          Sign In
+        </button>
+      </form>
+
+      <p class="auth-footer-text">
+        Need a staff account? <a href="auth-staff-signup.html" class="auth-link">Register</a>
+      </p>
+    </div>
+  </div>
+
+  <script src="auth.js"></script>
+</body>
+</html>

@@ -1,34 +1,74 @@
-// ============================================================
-//  AquaSphere - Swimming Pool Membership Website
-//  Program.cs - ASP.NET Core entry point
-//
-//  This file configures and starts the web server.
-//  It serves static files (HTML, CSS, JS) from wwwroot/
-//  and falls back to index.html for any unknown route,
-//  allowing the client-side JavaScript router in app.js
-//  to handle all page navigation without full page reloads.
-// ============================================================
+using Microsoft.Data.Sqlite;
 
 var builder = WebApplication.CreateBuilder(args);
-
-// Build the web application (no additional services needed
-// for a static file site — no controllers, no Razor Pages).
 var app = builder.Build();
 
-// ----------------------------------------------------------
-// Middleware: serve static files from wwwroot/
-// UseDefaultFiles() makes "/" serve "index.html" automatically.
-// UseStaticFiles() serves CSS, JS, images, etc.
-// ----------------------------------------------------------
-app.UseDefaultFiles();   // maps "/" → "/index.html"
-app.UseStaticFiles();    // serves wwwroot files directly
+// Create database/table when app starts
+SetupDatabase();
 
-// ----------------------------------------------------------
-// SPA fallback: any request that is NOT a static file
-// (e.g. browser refresh on a deep link) returns index.html.
-// The JavaScript router in app.js then handles the route.
-// ----------------------------------------------------------
-app.MapFallbackToFile("index.html");
+app.UseDefaultFiles();
+app.UseStaticFiles();
 
-// Start the server
+// Signup API
+app.MapPost("/signup", async (HttpContext context) =>
+{
+    var user = await context.Request.ReadFromJsonAsync<User>();
+
+    if (user == null)
+    {
+        return Results.BadRequest("Invalid data.");
+    }
+
+    using var connection = new SqliteConnection("Data Source=clive_database.db");
+    connection.Open();
+
+    var command = connection.CreateCommand();
+    command.CommandText = @"
+        INSERT INTO Users (FullName, Email, Password, Role)
+        VALUES ($name, $email, $password, $role);
+    ";
+
+    command.Parameters.AddWithValue("$name", user.FullName);
+    command.Parameters.AddWithValue("$email", user.Email);
+    command.Parameters.AddWithValue("$password", user.Password);
+    command.Parameters.AddWithValue("$role", user.Role);
+
+    command.ExecuteNonQuery();
+
+    return Results.Ok("User created successfully.");
+});
+
 app.Run();
+
+void SetupDatabase()
+{
+    string connectionString = "Data Source=clive_database.db";
+
+    using (var connection = new SqliteConnection(connectionString))
+    {
+        connection.Open();
+
+        string createTableQuery = @"
+            CREATE TABLE IF NOT EXISTS Users (
+                Id INTEGER PRIMARY KEY AUTOINCREMENT,
+                FullName TEXT NOT NULL,
+                Email TEXT NOT NULL UNIQUE,
+                Password TEXT NOT NULL,
+                Role TEXT NOT NULL
+            );
+        ";
+
+        using (var command = new SqliteCommand(createTableQuery, connection))
+        {
+            command.ExecuteNonQuery();
+        }
+    }
+}
+
+class User
+{
+    public string? FullName { get; set; }
+    public string? Email { get; set; }
+    public string? Password { get; set; }
+    public string? Role { get; set; }
+}

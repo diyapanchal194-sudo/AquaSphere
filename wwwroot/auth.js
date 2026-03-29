@@ -150,13 +150,13 @@
 
             if (pageType === 'staff-login') {
                 console.log('Staff login:', data);
-                alert('Staff login backend not connected yet.');
+                alert('Staff login under development');
             } else if (pageType === 'staff-signup') {
                 console.log('Staff signup:', data);
-                alert('Staff signup backend not connected yet.');
+                alert('Staff signup under development');
             } else if (pageType === 'admin-login') {
                 console.log('Admin login:', data);
-                alert('Admin backend not connected yet.');
+                alert('Admin backend under development');
             } else {
                 alert('Unknown form type.');
             }

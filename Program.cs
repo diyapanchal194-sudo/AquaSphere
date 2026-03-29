@@ -98,6 +98,23 @@ app.MapPost("/api/member/login", async (HttpContext context) =>
     });
 });
 
+app.MapGet("/api/member/all", () =>
+{
+    var members = GetAllMembers();
+    return Results.Ok(members);
+});
+
+app.MapGet("/api/member/search", (string email) =>
+{
+    var tree = BuildTree();
+    var member = tree.Search(email);
+
+    if (member == null)
+        return Results.NotFound(new { message = "Member not found." });
+
+    return Results.Ok(member);
+});
+
 app.Run();
 
 void SetupDatabase()
@@ -179,10 +196,55 @@ void SeedMembershipPlans(SqliteConnection connection)
     insertPlans.ExecuteNonQuery();
 }
 
+List<Member> GetAllMembers()
+{
+    var members = new List<Member>();
+
+    using var connection = new SqliteConnection("Data Source=clive_database.db");
+    connection.Open();
+
+    var command = connection.CreateCommand();
+    command.CommandText = @"
+        SELECT Id, FirstName, LastName, Email, Phone, JoinDate
+        FROM Members;
+    ";
+
+    using var reader = command.ExecuteReader();
+
+    while (reader.Read())
+    {
+        members.Add(new Member
+        {
+            Id = Convert.ToInt32(reader["Id"]),
+            FirstName = reader["FirstName"]?.ToString() ?? "",
+            LastName = reader["LastName"]?.ToString() ?? "",
+            Email = reader["Email"]?.ToString() ?? "",
+            Phone = reader["Phone"]?.ToString() ?? "",
+            JoinDate = reader["JoinDate"]?.ToString() ?? ""
+        });
+    }
+
+    return members;
+}
+
+MemberSearchTree BuildTree()
+{
+    var tree = new MemberSearchTree();
+    var members = GetAllMembers();
+
+    foreach (var member in members)
+    {
+        tree.Insert(member);
+    }
+
+    return tree;
+}
+
 string HashPassword(string password)
 {
     byte[] salt = RandomNumberGenerator.GetBytes(16);
     const int iterations = 100_000;
+
     byte[] hash = Rfc2898DeriveBytes.Pbkdf2(
         password,
         salt,
@@ -226,4 +288,78 @@ class MemberLoginRequest
 {
     public string? Email { get; set; }
     public string? Password { get; set; }
+}
+
+class Member
+{
+    public int Id { get; set; }
+    public string FirstName { get; set; } = "";
+    public string LastName { get; set; } = "";
+    public string Email { get; set; } = "";
+    public string Phone { get; set; } = "";
+    public string JoinDate { get; set; } = "";
+}
+
+class MemberNode
+{
+    public Member Data { get; set; }
+    public MemberNode? Left { get; set; }
+    public MemberNode? Right { get; set; }
+
+    public MemberNode(Member member)
+    {
+        Data = member;
+    }
+}
+
+class MemberSearchTree
+{
+    private MemberNode? root;
+
+    public void Insert(Member member)
+    {
+        root = InsertRecursive(root, member);
+    }
+
+    private MemberNode InsertRecursive(MemberNode? node, Member member)
+    {
+        if (node == null)
+            return new MemberNode(member);
+
+        int compare = string.Compare(
+            member.Email,
+            node.Data.Email,
+            StringComparison.OrdinalIgnoreCase);
+
+        if (compare < 0)
+            node.Left = InsertRecursive(node.Left, member);
+        else if (compare > 0)
+            node.Right = InsertRecursive(node.Right, member);
+
+        return node;
+    }
+
+    public Member? Search(string email)
+    {
+        return SearchRecursive(root, email);
+    }
+
+    private Member? SearchRecursive(MemberNode? node, string email)
+    {
+        if (node == null)
+            return null;
+
+        int compare = string.Compare(
+            email,
+            node.Data.Email,
+            StringComparison.OrdinalIgnoreCase);
+
+        if (compare == 0)
+            return node.Data;
+
+        if (compare < 0)
+            return SearchRecursive(node.Left, email);
+
+        return SearchRecursive(node.Right, email);
+    }
 }

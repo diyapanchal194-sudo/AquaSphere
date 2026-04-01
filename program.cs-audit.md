@@ -14,17 +14,23 @@ During the audit of the backend logic, I identified the following architectural 
 
 1. *Feature 1 - Search efficiency*
 **The problem**: Redundant rebuilds: the BuildTree() method is called inside every search request.
+
 **Technical risk**: Performance degradation: The O(log n) advantage of the BST is lost because the system performs an O(n) database fetch on every click.
+
 **Recommended fix**: Singleton pattern: Initialize the Tree once at startup and store it in the App memory for all subsequent searches.
 
-2. *Feature 2 - Data sync*
+3. *Feature 2 - Data sync*
 **The problem**: Cache inconsistency: new members are saved to SQL but not inserted into the active Tree.
+
 **Technical risk**: Search failure: a user who just signed up will not appear in search results until the web server is restarted.
+
 **Recommended fix**: Real-time update: add a tree.Insert(newMember) call immediately following the successful SQL INSERT command.
 
-3. *Feature 3 - Portability*
+5. *Feature 3 - Portability*
 **The problem**: Hard-coded paths: potential use of absolute drive paths (e.g., C:\Users\...) for the .db file.
+
 **Technical risk**: System crash: the project would fail to load on the professor's computer due to "Directory Not Found" errors.
+
 **Recommended fix**: Relative pathing: ensure the connection string remains Data Source=clive_database.db so it travels with the GitHub repo.
 
 # d. Final certification

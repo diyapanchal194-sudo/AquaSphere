@@ -6,7 +6,7 @@ namespace AquaSphere.Tests
     [TestClass]
     public class MemberNodeTests
     {
-        // Test 3: checking if the Node actually holds the Member data.
+        // Test 4: checking if the Node actually holds the Member data.
         // updated this to FirstName because the Member.cs model doesn't use "Name".
         [TestMethod]
         public void Test3_MemberNode_DataStorage_Check()
@@ -26,7 +26,7 @@ namespace AquaSphere.Tests
             Assert.AreEqual("singh", node.Data.LastName);
         }
 
-        /* Test 4: testing the Pointers. 
+        /* Test 5: testing the Pointers. 
            in a BST, the Left and Right links are the most important part.
            if these don't work, the whole MemberSearchTree will fail.
         */

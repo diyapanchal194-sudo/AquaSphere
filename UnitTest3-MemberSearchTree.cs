@@ -15,7 +15,7 @@ namespace AquaSphere.Tests
             _tree = new MemberSearchTree();
         }
 
-        // TEST 5: verifying the Binary Search Tree Recursive Insertion & Search
+        // TEST 6: verifying the Binary Search Tree Recursive Insertion & Search
         [TestMethod]
         public void Test5_BST_Should_Correctly_Insert_And_Find_By_Email()
         {
@@ -40,7 +40,7 @@ namespace AquaSphere.Tests
             Assert.AreEqual("Zebra", resultRight.FirstName);
         }
 
-        // Test 6: verifying Case Insensitivity in Search
+        // Test 7: verifying Case Insensitivity in Search
         [TestMethod]
         public void Test6_Search_Should_Be_Case_Insensitive()
         {
@@ -56,7 +56,7 @@ namespace AquaSphere.Tests
             Assert.AreEqual("User@AquaSphere.com", result.Email);
         }
 
-        // Test 7: verifying Edge Case - Searching for non-existent member
+        // Test 8: verifying Edge Case - Searching for non-existent member
         [TestMethod]
         public void Test7_Search_NonExistent_Should_Return_Null()
         {

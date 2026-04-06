@@ -1,0 +1,46 @@
+﻿<script>
+  var savedLocationLabel = localStorage.getItem('selectedLocationLabel');
+  var savedPlan = localStorage.getItem('selectedPlan');
+
+  if (savedLocationLabel) {
+    document.getElementById('locationLabel').textContent = savedLocationLabel;
+  }
+
+  if (savedPlan) {
+    document.getElementById('plan').value = savedPlan;
+  }
+
+  document.getElementById('cardNumber').addEventListener('input', function (e) {
+    let value = e.target.value.replace(/\D/g, '').substring(0, 16);
+    let formatted = value.match(/.{1,4}/g);
+    e.target.value = formatted ? formatted.join(' ') : '';
+  });
+
+  document.getElementById('expiry').addEventListener('input', function (e) {
+    let value = e.target.value.replace(/\D/g, '').substring(0, 4);
+    if (value.length >= 3) {
+      e.target.value = value.substring(0, 2) + '/' + value.substring(2);
+    } else {
+      e.target.value = value;
+    }
+  });
+
+  document.getElementById('paymentForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    let name = document.getElementById('name').value;
+    let card = document.getElementById('cardNumber').value.replace(/\s/g, '');
+
+    if (!name.trim()) {
+      alert('Please enter your full name');
+      return;
+    }
+
+    if (card.length !== 16) {
+      alert('Invalid card number');
+      return;
+    }
+
+    document.getElementById('successMsg').style.display = 'block';
+  });
+</script>

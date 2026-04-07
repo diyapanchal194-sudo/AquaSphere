@@ -1,6 +1,5 @@
 using System.Security.Cryptography;
-using Microsoft.Data.Sqlite;
-
+Microsoft.Data.Sqlite;
 var builder = WebApplication.CreateBuilder(args);
 var app = builder.Build();
 

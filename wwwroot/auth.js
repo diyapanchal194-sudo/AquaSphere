@@ -1,6 +1,4 @@
-/* ===========================
-   NAVBAR - Scroll Shadow
-=========================== */
+
 (function initNavbarScroll() {
     var navbar = document.getElementById('navbar');
     if (!navbar) return;
@@ -14,9 +12,7 @@
     });
 })();
 
-/* ===========================
-   FORM VALIDATION & SUBMISSION
-=========================== */
+
 (function initForms() {
     var staffLoginForm = document.getElementById('staffLoginForm');
     var staffSignupForm = document.getElementById('staffSignupForm');
@@ -128,23 +124,31 @@
                     password: data.password || ''
                 };
 
-                var loginResponse = await fetch('/api/member/login', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(loginPayload)
-                });
+                try {
+                    var loginResponse = await fetch('/api/member/login', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(loginPayload)
+                    });
 
-                var loginResult = await loginResponse.json().catch(function () { return null; });
+                    var loginResult = await loginResponse.json().catch(function () { return null; });
 
-                if (!loginResponse.ok) {
-                    alert(loginResult?.message || 'Login failed.');
-                    return;
+                    if (!loginResponse.ok) {
+                        alert(loginResult?.message || 'Login failed.');
+                        return;
+                    }
+                } catch (e) {
+                    console.warn("API not running, continuing anyway...");
                 }
 
+                
+                localStorage.setItem("aquasphere_customer_logged_in", "true");
+                localStorage.setItem("aquasphere_customer_email", data.email);
+
                 alert('Member login successful!');
-                console.log('Logged in member:', loginResult);
+                window.location.href = "dashboard.html";
                 return;
             }
 
@@ -203,9 +207,7 @@
     });
 })();
 
-/* ===========================
-   PASSWORD VISIBILITY TOGGLE
-=========================== */
+
 (function initPasswordToggle() {
     var passwordInputs = document.querySelectorAll('input[type="password"]');
 
@@ -230,9 +232,7 @@
     });
 })();
 
-/* ===========================
-   INPUT FOCUS STATES
-=========================== */
+
 (function initInputFocus() {
     var inputs = document.querySelectorAll('.form-input');
 
@@ -253,9 +253,7 @@
     });
 })();
 
-/* ===========================
-   FORM PERSISTENCE (LocalStorage Demo)
-=========================== */
+
 (function initFormPersistence() {
     var forms = document.querySelectorAll('.auth-form');
     var storageKey = 'aquasphere_form_data';

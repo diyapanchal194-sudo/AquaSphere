@@ -1,6 +1,4 @@
-/* ===========================
-   NAVBAR - Scroll Shadow
-=========================== */
+
 (function initNavbarScroll() {
     var navbar = document.getElementById('navbar');
     if (!navbar) return;
@@ -14,9 +12,7 @@
     });
 })();
 
-/* ===========================
-   MOBILE MENU - Toggle
-=========================== */
+
 (function initMobileMenu() {
     var hamburgerBtn = document.getElementById('hamburgerBtn');
     var mobileMenu = document.getElementById('mobileMenu');
@@ -35,9 +31,7 @@
     });
 })();
 
-/* ===========================
-   SMOOTH SCROLL TO SECTION
-=========================== */
+
 function scrollToSection(sectionId) {
     var target = document.getElementById(sectionId);
     if (!target) return;
@@ -46,9 +40,7 @@ function scrollToSection(sectionId) {
     window.scrollTo({ top: offsetTop, behavior: 'smooth' });
 }
 
-/* ===========================
-   LOCATIONS - Map Switching
-=========================== */
+
 (function initLocationsList() {
     var locationItems = document.querySelectorAll('.location-item');
     var mapFrame = document.getElementById('mapFrame');
@@ -115,17 +107,13 @@ function scrollToSection(sectionId) {
     setActiveLocation(0);
 })();
 
-/* ===========================
-   DIRECTIONS BUTTON
-=========================== */
+
 function openDirections() {
     var url = window._activeDirectionsUrl || 'https://www.google.com/maps/search/AquaSphere+London+Royal+Docks';
     window.open(url, '_blank', 'noopener,noreferrer');
 }
 
-/* ===========================
-   GEOLOCATION - Use my location
-=========================== */
+
 (function initGeolocation() {
     var btn = document.getElementById('useLocationBtn');
     if (!btn) return;
@@ -159,9 +147,7 @@ function openDirections() {
     });
 })();
 
-/* ===========================
-   TESTIMONIALS - Carousel
-=========================== */
+
 (function initTestimonials() {
     var testimonials = [
         {
@@ -224,9 +210,7 @@ function openDirections() {
     });
 })();
 
-/* ===========================
-   MEMBERSHIP PLAN BUTTONS
-=========================== */
+
 (function initPlanButtons() {
     var buttons = [
         document.getElementById('joinStarterBtn'),

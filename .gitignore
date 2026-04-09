@@ -4,3 +4,10 @@
 
 /.vs
 /.gitignore
+/clive_database.db
+/obj/Debug/net8.0/AquaSphere.AssemblyInfo.cs
+/obj/Debug/net8.0/AquaSphere.AssemblyInfoInputs.cache
+/obj/Debug/net8.0/AquaSphere.assets.cache
+/obj/Debug/net8.0/rpswa.dswa.cache.json
+/.gitignore
+/.gitignore

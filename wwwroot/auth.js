@@ -1,232 +1,118 @@
-/* ===========================
-   NAVBAR - Scroll Shadow
-=========================== */
-(function initNavbarScroll() {
-  var navbar = document.getElementById('navbar');
-  if (!navbar) return;
+(function () {
+    var signupForm = document.getElementById('memberSignupForm');
+    var loginForm = document.getElementById('memberLoginForm');
 
-  window.addEventListener('scroll', function () {
-    if (window.scrollY > 10) {
-      navbar.classList.add('scrolled');
-    } else {
-      navbar.classList.remove('scrolled');
-    }
-  });
-})();
+    function showMessage(message, type) {
+        var messageBox = document.getElementById('formMessage');
 
-/* ===========================
-   FORM VALIDATION & SUBMISSION
-=========================== */
-(function initForms() {
-  var staffLoginForm = document.getElementById('staffLoginForm');
-  var staffSignupForm = document.getElementById('staffSignupForm');
-  var adminLoginForm = document.getElementById('adminLoginForm');
-  var memberLoginForm = document.getElementById('memberLoginForm');
-  var memberSignupForm = document.getElementById('memberSignupForm');
-
-  function handleFormSubmit(e) {
-    e.preventDefault();
-    var form = e.target;
-    var isValid = validateForm(form);
-    
-    if (isValid) {
-      var formData = new FormData(form);
-      var data = Object.fromEntries(formData);
-      handleFormSubmission(form, data);
-    }
-  }
-
-  function validateForm(form) {
-    var inputs = form.querySelectorAll('input[required]');
-    var isValid = true;
-
-    inputs.forEach(function (input) {
-      if (!input.value.trim()) {
-        input.style.borderColor = '#EF4444';
-        isValid = false;
-      } else {
-        input.style.borderColor = '';
-      }
-
-      if (input.type === 'email' && !isValidEmail(input.value)) {
-        input.style.borderColor = '#EF4444';
-        isValid = false;
-      }
-
-      if (input.name === 'password' || input.name === 'confirmPassword') {
-        if (input.value.length < 6) {
-          input.style.borderColor = '#EF4444';
-          isValid = false;
+        if (!messageBox) {
+            alert(message);
+            return;
         }
-      }
-    });
 
-    var passwordInput = form.querySelector('input[name="password"]');
-    var confirmInput = form.querySelector('input[name="confirmPassword"]');
-    if (passwordInput && confirmInput && passwordInput.value !== confirmInput.value) {
-      confirmInput.style.borderColor = '#EF4444';
-      isValid = false;
+        messageBox.textContent = message;
+        messageBox.className = 'form-message ' + type;
+        messageBox.style.display = 'block';
     }
 
-    return isValid;
-  }
+    if (signupForm) {
+        signupForm.addEventListener('submit', async function (e) {
+            e.preventDefault();
 
-  function isValidEmail(email) {
-    var re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return re.test(email);
-  }
+            var firstName = document.getElementById('firstName').value.trim();
+            var lastName = document.getElementById('lastName').value.trim();
+            var email = document.getElementById('signupEmail').value.trim();
+            var phoneInput = document.getElementById('phone');
+            var phone = phoneInput ? phoneInput.value.trim() : '';
+            var password = document.getElementById('signupPassword').value;
+            var confirmPassword = document.getElementById('confirmSignupPassword').value;
 
-  function handleFormSubmission(form, data) {
-    var submitBtn = form.querySelector('button[type="submit"]');
-    var originalText = submitBtn.textContent;
-    
-    submitBtn.disabled = true;
-    submitBtn.textContent = 'Processing...';
+            if (!firstName || !lastName || !email || !password || !confirmPassword) {
+                showMessage("Please fill all fields", "error");
+                return;
+            }
 
-    setTimeout(function () {
-      var pageType = identifyPageType(form);
-      
-      if (pageType === 'staff-login') {
-        console.log('Staff login:', data);
-        alert('Staff login would be processed. (Demo - no backend)');
-      } else if (pageType === 'staff-signup') {
-        console.log('Staff signup:', data);
-        alert('Staff account creation would be processed. (Demo - no backend)');
-      } else if (pageType === 'admin-login') {
-        console.log('Admin login:', data);
-        alert('Admin verification would be processed. (Demo - no backend)');
-      } else if (pageType === 'member-login') {
-        console.log('Member login:', data);
-        alert('Member login would be processed. (Demo - no backend)');
-      } else if (pageType === 'member-signup') {
-        console.log('Member signup:', data);
-        alert('Member account creation would be processed. (Demo - no backend)');
-      }
+            if (password !== confirmPassword) {
+                showMessage("Passwords do not match", "error");
+                return;
+            }
 
-      submitBtn.disabled = false;
-      submitBtn.textContent = originalText;
-    }, 600);
-  }
+            try {
+                var response = await fetch('/api/member/signup', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        firstName: firstName,
+                        lastName: lastName,
+                        email: email,
+                        phone: phone,
+                        password: password
+                    })
+                });
 
-  function identifyPageType(form) {
-    var inputs = form.querySelectorAll('input');
-    var hasConfirmPassword = Array.from(inputs).some(function (i) {
-      return i.name === 'confirmPassword';
-    });
-    var hasFullName = Array.from(inputs).some(function (i) {
-      return i.name === 'fullName';
-    });
-    var hasFirstName = Array.from(inputs).some(function (i) {
-      return i.name === 'firstName';
-    });
+                var result = await response.json().catch(function () { return null; });
 
-    if (form.id === 'staffLoginForm') return 'staff-login';
-    if (form.id === 'staffSignupForm') return 'staff-signup';
-    if (form.id === 'adminLoginForm') return 'admin-login';
-    if (form.id === 'memberLoginForm') return 'member-login';
-    if (form.id === 'memberSignupForm') return 'member-signup';
-    
-    return 'unknown';
-  }
+                if (!response.ok) {
+                    showMessage((result && result.message) || "Signup failed", "error");
+                    return;
+                }
 
-  if (staffLoginForm) {
-    staffLoginForm.addEventListener('submit', handleFormSubmit);
-  }
-  if (staffSignupForm) {
-    staffSignupForm.addEventListener('submit', handleFormSubmit);
-  }
-  if (adminLoginForm) {
-    adminLoginForm.addEventListener('submit', handleFormSubmit);
-  }
-  if (memberLoginForm) {
-    memberLoginForm.addEventListener('submit', handleFormSubmit);
-  }
-  if (memberSignupForm) {
-    memberSignupForm.addEventListener('submit', handleFormSubmit);
-  }
+                showMessage("Signup successful! Redirecting to login...", "success");
 
-  var allInputs = document.querySelectorAll('.form-input');
-  allInputs.forEach(function (input) {
-    input.addEventListener('change', function () {
-      this.style.borderColor = '';
-    });
-  });
-})();
-
-/* ===========================
-   PASSWORD VISIBILITY TOGGLE
-=========================== */
-(function initPasswordToggle() {
-  var passwordInputs = document.querySelectorAll('input[type="password"]');
-  
-  passwordInputs.forEach(function (input) {
-    var wrapper = input.closest('.form-input-wrapper');
-    if (!wrapper) return;
-
-    var toggleBtn = document.createElement('button');
-    toggleBtn.type = 'button';
-    toggleBtn.className = 'password-toggle-btn';
-    toggleBtn.setAttribute('aria-label', 'Toggle password visibility');
-    toggleBtn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>';
-    
-    wrapper.appendChild(toggleBtn);
-
-    toggleBtn.addEventListener('click', function (e) {
-      e.preventDefault();
-      var isPassword = input.type === 'password';
-      input.type = isPassword ? 'text' : 'password';
-      toggleBtn.classList.toggle('active', !isPassword);
-    });
-  });
-})();
-
-/* ===========================
-   INPUT FOCUS STATES
-=========================== */
-(function initInputFocus() {
-  var inputs = document.querySelectorAll('.form-input');
-  
-  inputs.forEach(function (input) {
-    input.addEventListener('focus', function () {
-      this.closest('.form-input-wrapper').style.opacity = '1';
-    });
-
-    input.addEventListener('blur', function () {
-      if (!this.value) {
-        this.closest('.form-input-wrapper').style.opacity = '0.8';
-      }
-    });
-  });
-})();
-
-/* ===========================
-   FORM PERSISTENCE (LocalStorage Demo)
-=========================== */
-(function initFormPersistence() {
-  var forms = document.querySelectorAll('.auth-form');
-  var storageKey = 'aquasphere_form_data';
-
-  forms.forEach(function (form) {
-    var inputs = form.querySelectorAll('input');
-    
-    inputs.forEach(function (input) {
-      input.addEventListener('input', function () {
-        var formData = {};
-        inputs.forEach(function (i) {
-          if (i.type !== 'checkbox' || i.checked) {
-            formData[i.name] = i.value;
-          }
+                setTimeout(function () {
+                    window.location.href = "auth-member-login.html";
+                }, 1200);
+            } catch (error) {
+                showMessage("Something went wrong. Please try again.", "error");
+            }
         });
-        localStorage.setItem(storageKey + '_' + form.id, JSON.stringify(formData));
-      });
+    }
 
-      var saved = localStorage.getItem(storageKey + '_' + form.id);
-      if (saved) {
-        var data = JSON.parse(saved);
-        if (data[input.name]) {
-          input.value = data[input.name];
-        }
-      }
-    });
-  });
+    if (loginForm) {
+        loginForm.addEventListener('submit', async function (e) {
+            e.preventDefault();
+
+            var email = document.getElementById('memberEmail').value.trim();
+            var password = document.getElementById('memberPassword').value;
+
+            if (!email || !password) {
+                showMessage("Please enter email and password", "error");
+                return;
+            }
+
+            try {
+                var response = await fetch('/api/member/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        email: email,
+                        password: password
+                    })
+                });
+
+                var result = await response.json().catch(function () { return null; });
+
+                if (!response.ok) {
+                    showMessage((result && result.message) || "Invalid email or password", "error");
+                    return;
+                }
+
+                localStorage.setItem('aquasphere_customer_logged_in', 'true');
+                localStorage.setItem('aquasphere_customer_name', (result && result.member && result.member.FirstName) || email);
+                localStorage.setItem('aquasphere_customer_email', email);
+
+                showMessage("Login successful! Redirecting to dashboard...", "success");
+
+                setTimeout(function () {
+                    window.location.href = "dashboard.html";
+                }, 1200);
+            } catch (error) {
+                showMessage("Something went wrong. Please try again.", "error");
+            }
+        });
+    }
 })();

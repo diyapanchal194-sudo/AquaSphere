@@ -132,112 +132,230 @@
     <div class="container">
       <div class="locations-layout">
 
-        <div class="locations-left">
-          <h2 class="section-title">
-            Find your nearest<br />
-            <span class="section-title-blue">AquaSphere.</span>
-          </h2>
-          <p class="section-subtitle">
-            Access our world-class facilities at any of our 10 flagship UK locations.
-          </p>
-          <button class="btn-use-location" id="useLocationBtn">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2">
-              <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/>
-            </svg>
-            Use my current location
-          </button>
+          <div class="locations-left">
+              <h2 class="section-title">
+                  Find your nearest<br />
+                  <span class="section-title-blue">AquaSphere.</span>
+              </h2>
+              <p class="section-subtitle">
+                  Access our world-class facilities at any of our 10 flagship UK locations.
+              </p>
+              <button class="btn-use-location" id="useLocationBtn">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2">
+                      <circle cx="12" cy="12" r="10" />
+                      <line x1="12" y1="8" x2="12" y2="16" />
+                      <line x1="8" y1="12" x2="16" y2="12" />
+                  </svg>
+                  Use my current location
+              </button>
 
-          <div class="locations-list" id="locationsList">
-            <div class="location-item active" data-lat="51.5085" data-lng="-0.0218">
-              <div class="location-icon">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2">
-                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/>
-                </svg>
-              </div>
-              <div class="location-info">
-                <h4>AquaSphere London Royal Docks</h4>
-                <p>Royal Docks, London E16 1AH, UK</p>
-                <div class="location-tags">
-                  <span class="tag">HERITAGE SITE</span>
-                  <span class="tag">WATERFRONT DECK</span>
-                  <span class="tag">MASSAGE</span>
-                </div>
-              </div>
-            </div>
+              <div class="locations-list" id="locationsList">
+                  <div class="location-item active" data-lat="51.5085" data-lng="-0.0218">
+                      <div class="location-icon">
+                          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2">
+                              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
+                              <circle cx="12" cy="10" r="3" />
+                          </svg>
+                      </div>
+                      <!-- 1 -->
+                      <div class="location-info">
+                          <h4>AquaSphere London Royal Docks</h4>
+                          <p>Royal Docks, London E16 1AH, UK</p>
+                          <div class="location-tags">
+                              <span class="tag">HERITAGE SITE</span>
+                              <span class="tag">WATERFRONT DECK</span>
+                              <span class="tag">MASSAGE</span>
+                          </div>
+                      </div>
+                  </div>
 
-            <div class="location-item" data-lat="53.3811" data-lng="-2.9978">
-              <div class="location-icon">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#6B7280" stroke-width="2">
-                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/>
-                </svg>
-              </div>
-              <div class="location-info">
-                <h4>AquaSphere Liverpool Albert Dock</h4>
-                <p>Albert Dock, Liverpool L3 4AF, UK</p>
-                <div class="location-tags">
-                  <span class="tag">HERITAGE SITE</span>
-                  <span class="tag">WATERFRONT DECK</span>
-                  <span class="tag">MASSAGE</span>
-                </div>
-              </div>
-            </div>
+                  <div class="location-item" data-lat="53.3811" data-lng="-2.9978">
+                      <div class="location-icon">
+                          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#6B7280" stroke-width="2">
+                              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
+                              <circle cx="12" cy="10" r="3" />
+                          </svg>
+                      </div>
+                      <!-- 2 -->
+                      <div class="location-info">
+                          <h4>AquaSphere Liverpool Albert Dock</h4>
+                          <p>Albert Dock, Liverpool L3 4AF, UK</p>
+                          <div class="location-tags">
+                              <span class="tag">HERITAGE SITE</span>
+                              <span class="tag">WATERFRONT DECK</span>
+                              <span class="tag">MASSAGE</span>
+                          </div>
+                      </div>
+                  </div>
 
-            <div class="location-item" data-lat="53.3808" data-lng="-1.4703">
-              <div class="location-icon">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#6B7280" stroke-width="2">
-                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/>
-                </svg>
-              </div>
-              <div class="location-info">
-                <h4>AquaSphere Sheffield Peak</h4>
-                <p>Sheffield City Centre, Sheffield S1 2BP, UK</p>
-                <div class="location-tags">
-                  <span class="tag">ECO-FRIENDLY</span>
-                  <span class="tag">RAINWATER HARVESTING</span>
-                  <span class="tag">FAMILY FUN</span>
-                </div>
-              </div>
-            </div>
+                  <div class="location-item" data-lat="53.3808" data-lng="-1.4703">
+                      <div class="location-icon">
+                          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#6B7280" stroke-width="2">
+                              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
+                              <circle cx="12" cy="10" r="3" />
+                          </svg>
+                      </div>
+                      <!-- 3 -->
+                      <div class="location-info">
+                          <h4>AquaSphere Sheffield Peak</h4>
+                          <p>Sheffield City Centre, Sheffield S1 2BP, UK</p>
+                          <div class="location-tags">
+                              <span class="tag">ECO-FRIENDLY</span>
+                              <span class="tag">RAINWATER HARVESTING</span>
+                              <span class="tag">FAMILY FUN</span>
+                          </div>
+                      </div>
+                  </div>
 
-            <div class="location-item" data-lat="51.4641" data-lng="-3.1650">
-              <div class="location-icon">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#6B7280" stroke-width="2">
-                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/>
-                </svg>
+                  <div class="location-item" data-lat="51.4641" data-lng="-3.1650">
+                      <div class="location-icon">
+                          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#6B7280" stroke-width="2">
+                              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
+                              <circle cx="12" cy="10" r="3" />
+                          </svg>
+                      </div>
+                      <!-- 4 -->
+                      <div class="location-info">
+                          <h4>AquaSphere Cardiff Bay</h4>
+                          <p>Cardiff Bay, Cardiff CF10 5AN, UK</p>
+                          <div class="location-tags">
+                              <span class="tag">BAY VIEWS</span>
+                              <span class="tag">SMART LOCKERS</span>
+                          </div>
+                      </div>
+                  </div>
+              
+              <div class="location-item">
+                  <div class="location-icon">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#6B7280" stroke-width="2">
+                          <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
+                          <circle cx="12" cy="10" r="3" />
+                      </svg>
+                  </div>
+                  <!--5-->
+                  <div class="location-info">
+                      <h4>AquaSphere Manchester MediaCity</h4>
+                      <p>Manchester, MediaCity M50 2EQ, UK</p>
+                      <div class="location-tags">
+                          <span class="tag">HERITAGE SITE</span>
+                          <span class="tag">WATERFRONT DECK</span>
+                          <span class="tag">MASSAGE</span>
+                      </div>
+                  </div>
               </div>
-              <div class="location-info">
-                <h4>AquaSphere Cardiff Bay</h4>
-                <p>Cardiff Bay, Cardiff CF10 5AN, UK</p>
-                <div class="location-tags">
-                  <span class="tag">BAY VIEWS</span>
-                  <span class="tag">SMART LOCKERS</span>
-                </div>
+              <div class="location-item">
+                  <div class="location-icon">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#6B7280" stroke-width="2">
+                          <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
+                          <circle cx="12" cy="10" r="3" />
+                      </svg>
+                  </div>
+                  <!--6-->
+                  <div class="location-info">
+                      <h4>AquaSphere Birmingham Edgbaston</h4>
+                      <p>Birmigham, Edgbaston B15 2TT, UK</p>
+                      <div class="location-tags">
+                          <span class="tag">HERITAGE SITE</span>
+                          <span class="tag">WATERFRONT DECK</span>
+                          <span class="tag">MASSAGE</span>
+                      </div>
+                  </div>
               </div>
-            </div>
+              <div class="location-item">
+                  <div class="location-icon">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#6B7280" stroke-width="2">
+                          <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
+                          <circle cx="12" cy="10" r="3" />
+                      </svg>
+                  </div>
+                  <!--7-->
+                  <div class="location-info">
+                      <h4>AquaSphere Edinburgh Holyrood</h4>
+                      <p> Edinburgh , Holyrood EH8 8AS, UK</p>
+                      <div class="location-tags">
+                          <span class="tag">BAY VIEWS</span>
+                          <span class="tag">SMART LOCKERS</span>
+                      </div>
+                  </div>
+              </div>
+              <div class="location-item">
+                  <div class="location-icon">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#6B7280" stroke-width="2">
+                          <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
+                          <circle cx="12" cy="10" r="3" />
+                      </svg>
+                  </div>
+                  <!--8-->
+                  <div class="location-info">
+                      <h4>AquaSphere Bristol Harbourside</h4>
+                      <p> Bristol , Harbourside BS1 5LL, UK</p>
+                      <div class="location-tags">
+                          <span class="tag">ECO-FRIENDLY</span>
+                          <span class="tag">RAINWATER HARVESTING</span>
+                          <span class="tag">FAMILY FUN</span>
+                      </div>
+                  </div>
+              </div>
+              <div class="location-item">
+                  <div class="location-icon">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#6B7280" stroke-width="2">
+                          <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
+                          <circle cx="12" cy="10" r="3" />
+                      </svg>
+                  </div>
+                  <!--9-->
+                  <div class="location-info">
+                      <h4>AquaSphere Leeds Victoria</h4>
+                      <p> Leeds , Victoria LS2 7AU, UK</p>
+                      <div class="location-tags">
+                          <span class="tag">BAY VIEWS</span>
+                          <span class="tag">SMART LOCKERS</span>
+                      </div>
+                  </div>
+              </div>
+              <div class="location-item">
+                  <div class="location-icon">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#6B7280" stroke-width="2">
+                          <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
+                          <circle cx="12" cy="10" r="3" />
+                      </svg>
+                  </div>
+                  <!--10-->
+                  <div class="location-info">
+                      <h4>AquaSphere Glasgow West End</h4>
+                      <p> Glasgow , West End  G12 8QQ, UK</p>
+                      <div class="location-tags">
+                          <span class="tag">HERITAGE SITE</span>
+                          <span class="tag">WATERFRONT DECK</span>
+                          <span class="tag">MASSAGE</span>
+                      </div>
+                  </div>
+              </div>
+              </div>
           </div>
-        </div>
 
-        <div class="locations-right">
-          <div class="map-container">
-            <iframe
-              id="mapFrame"
-              class="map-iframe"
-              src="https://maps.google.com/maps?q=Royal+Docks+London+E16+1AH&output=embed&z=14"
-              allowfullscreen
-              loading="lazy"
-              referrerpolicy="no-referrer-when-downgrade"
-              title="AquaSphere Location Map">
-            </iframe>
-            <button class="map-directions-btn" id="directionsBtn" onclick="openDirections()">
-              Get Directions
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/>
-              </svg>
-            </button>
+              <div class="locations-right">
+                  <div class="map-container">
+                      <iframe id="mapFrame"
+                              class="map-iframe"
+                              src="https://maps.google.com/maps?q=Royal+Docks+London+E16+1AH&output=embed&z=14"
+                              allowfullscreen
+                              loading="lazy"
+                              referrerpolicy="no-referrer-when-downgrade"
+                              title="AquaSphere Location Map">
+                      </iframe>
+                      <button class="map-directions-btn" id="directionsBtn" onclick="openDirections()">
+                          Get Directions
+                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                              <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6" />
+                              <polyline points="15 3 21 3 21 9" />
+                              <line x1="10" y1="14" x2="21" y2="3" />
+                          </svg>
+                      </button>
+                  </div>
+              </div>
+
           </div>
-        </div>
-
-      </div>
     </div>
   </section>
 

@@ -16,7 +16,7 @@
 
 /* ===========================
    MOBILE MENU - Toggle
-=========================== */
+============================ */  
 (function initMobileMenu() {
   var hamburgerBtn = document.getElementById('hamburgerBtn');
   var mobileMenu = document.getElementById('mobileMenu');
@@ -78,7 +78,44 @@ function scrollToSection(sectionId) {
       mapSrc: 'https://maps.google.com/maps?q=Cardiff+Bay+CF10+5AN+UK&output=embed&z=14',
       directionsUrl: 'https://www.google.com/maps/dir/?api=1&destination=Cardiff+Bay+CF10+5AN+UK',
       membershipLabel: 'LOCATION: AQUASPHERE CARDIFF BAY'
-    }
+      },
+      {
+          name: 'AquaSphere Manchester MediaCity',
+          mapSrc: 'https://maps.google.com/maps?q=MediaCity+Manchester+M50+2EQ+UK&output=embed&z=14',
+          directionsUrl: 'https://www.google.com/maps/dir/?api=1&destination=MediaCity+Manchester+M50+2EQ+UK',
+          membershipLabel: 'LOCATION: AQUASPHERE MANCHESTER MEDIACITY'
+      },
+      {
+          name: 'AquaSphere Birmingham Edgbaston',
+          mapSrc: 'https://maps.google.com/maps?q=Edgbaston+Birmingham+B15+2TT+UK&output=embed&z=14',
+          directionsUrl: 'https://www.google.com/maps/dir/?api=1&destination=Edgbaston+Birmingham+B15+2TT+UK',
+          membershipLabel: 'LOCATION: AQUASPHERE BIRMINGHAM EDGBASTON'
+      },
+      {
+          name: 'AquaSphere Edinburgh Holyrood',
+          mapSrc: 'https://maps.google.com/maps?q=Holyrood+Edinburgh+EH8+8AS+UK&output=embed&z=14',
+          directionsUrl: 'https://www.google.com/maps/dir/?api=1&destination=Holyrood+Edinburgh+EH8+8AS+UK',
+          membershipLabel: 'LOCATION: AQUASPHERE EDINBURGH HOLYROOD'
+      },
+      {
+          name: 'AquaSphere Bristol Harbourside',
+          mapSrc: 'https://maps.google.com/maps?q=Harbourside+Bristol+BS1+5LL+UK&output=embed&z=14',
+          directionsUrl: 'https://www.google.com/maps/dir/?api=1&destination=Harbourside+Bristol+BS1+5LL+UK',
+          membershipLabel: 'LOCATION: AQUASPHERE BRISTOL HARBOURSIDE'
+      },
+      {
+          name: 'AquaSphere Leeds Victoria',
+          mapSrc: 'https://maps.google.com/maps?q=Leeds+Victoria+LS2+7AU+UK&output=embed&z=14',
+          directionsUrl: 'https://www.google.com/maps/dir/?api=1&destination=Leeds+Victoria+LS2+7AU+UK',
+          membershipLabel: 'LOCATION: AQUASPHERE LEEDS VICTORIA'
+      },
+      {
+          name: 'AquaSphere Glasgow West End',
+          mapSrc: 'https://maps.google.com/maps?q=West+End+Glasgow+G12+8QQ+UK&output=embed&z=14',
+          directionsUrl: 'https://www.google.com/maps/dir/?api=1&destination=West+End+Glasgow+G12+8QQ+UK',
+          membershipLabel: 'LOCATION: AQUASPHERE GLASGOW WEST END'
+      }
+
   ];
 
   var activeIndex = 0;
@@ -237,7 +274,7 @@ function openDirections() {
   buttons.forEach(function (btn) {
     if (!btn) return;
     btn.addEventListener('click', function () {
-      window.location.href = '#';
+        window.location.href = 'payment.html';
     });
   });
 })();

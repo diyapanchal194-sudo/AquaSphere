@@ -1,0 +1,169 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AquaSphere Payment</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f7fb;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .payment-container {
+            background: #fff;
+            padding: 30px;
+            width: 380px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            margin-bottom: 10px;
+        }
+
+        .location {
+            color: #2563EB;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+        }
+
+        .row {
+            display: flex;
+            gap: 10px;
+        }
+
+            .row input {
+                flex: 1;
+            }
+
+        .pay-btn {
+            width: 100%;
+            padding: 12px;
+            background: #2563EB;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+            .pay-btn:hover {
+                background: #1e4fd1;
+            }
+
+        .success {
+            display: none;
+            text-align: center;
+            color: green;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="payment-container">
+        <h2>Complete Your Payment</h2>
+        <div class="location" id="locationLabel">
+            LOCATION: AQUASPHERE LONDON ROYAL DOCKS
+        </div>
+
+        <form id="paymentForm">
+
+            <div class="input-group">
+                <label>Full Name</label>
+                <input type="text" id="name" required>
+            </div>
+
+            <div class="input-group">
+                <label>Membership Plan</label>
+                <select id="plan">
+                    <option value="Starter - £29/month">Starter - £29/month</option>
+                    <option value="Pro - £59/month">Pro - £59/month</option>
+                    <option value="Elite - £99/month">Elite - £99/month</option>
+                </select>
+            </div>
+
+            <div class="input-group">
+                <label>Card Number</label>
+                <input type="text" id="cardNumber" maxlength="19" placeholder="1234 5678 9012 3456" required>
+            </div>
+
+            <div class="row">
+                <div class="input-group">
+                    <label>Expiry</label>
+                    <input type="text" id="expiry" placeholder="MM/YY" maxlength="5" required>
+                </div>
+
+                <div class="input-group">
+                    <label>CVV</label>
+                    <input type="password" id="cvv" maxlength="3" required>
+                </div>
+            </div>
+
+            <button type="submit" class="pay-btn">Pay Now</button>
+        </form>
+
+        <div class="success" id="successMsg">
+            ✅ Payment Successful!
+        </div>
+    </div>
+
+    <script>// Auto format card number
+document.getElementById('cardNumber').addEventListener('input', function(e) {
+  let value = e.target.value.replace(/\D/g, '').substring(0,16);
+  let formatted = value.match(/.{1,4}/g);
+  e.target.value = formatted ? formatted.join(' ') : '';
+});
+
+// Expiry format
+document.getElementById('expiry').addEventListener('input', function(e) {
+  let value = e.target.value.replace(/\D/g, '').substring(0,4);
+  if (value.length >= 3) {
+    e.target.value = value.substring(0,2) + '/' + value.substring(2);
+  } else {
+    e.target.value = value;
+  }
+});
+
+// Form submit
+document.getElementById('paymentForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+
+  let name = document.getElementById('name').value;
+  let card = document.getElementById('cardNumber').value.replace(/\s/g, '');
+
+  if (card.length !== 16) {
+    alert('Invalid card number');
+    return;
+  }
+
+  // Simulate payment success
+  document.getElementById('successMsg').style.display = 'block';
+});</script>
+
+</body>
+</html>

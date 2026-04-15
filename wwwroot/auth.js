@@ -1,7 +1,7 @@
 (function () {
     var signupForm = document.getElementById('memberSignupForm');
     var loginForm = document.getElementById('memberLoginForm');
-
+    
     function showMessage(message, type) {
         var messageBox = document.getElementById('formMessage');
 

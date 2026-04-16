@@ -1,126 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Member Login - AquaSphere</title>
-  <link rel="stylesheet" href="styles.css" />
-  <link rel="stylesheet" href="auth.css" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Member Login - AquaSphere</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="auth.css" />
 </head>
 <body>
-
-  <!-- NAVBAR -->
-  <nav class="navbar" id="navbar">
-    <div class="nav-container">
-      <a href="/" class="nav-logo">
-        <svg class="logo-icon" width="28" height="18" viewBox="0 0 28 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M2 5C5 2 8 8 11 5C14 2 17 8 20 5C23 2 26 8 26 5" stroke="#2563EB" stroke-width="2.5" stroke-linecap="round"/>
-          <path d="M2 11C5 8 8 14 11 11C14 8 17 14 20 11C23 8 26 14 26 11" stroke="#2563EB" stroke-width="2.5" stroke-linecap="round"/>
-          <path d="M2 17C5 14 8 20 11 17C14 14 17 20 20 17C23 14 26 20 26 17" stroke="#2563EB" stroke-width="2.5" stroke-linecap="round"/>
-        </svg>
-        <span class="logo-text">AquaSphere</span>
-      </a>
-      <ul class="nav-links">
-        <li><a href="/" class="nav-link">Home</a></li>
-        <li><a href="#" class="nav-link">Locations</a></li>
-      </ul>
-      <div class="nav-actions">
-        <button class="btn-portal" onclick="window.location.href='auth-staff-login.html'">Staff Access</button>
-        <button class="btn-portal" onclick="window.location.href='auth-admin-login.html'">Admin Control</button>
-        <button class="btn-signin">Sign In</button>
-      </div>
-    </div>
-  </nav>
-
-  <!-- AUTH SPLIT CONTAINER -->
-  <div class="auth-split-container">
-    <div class="auth-split-left">
-      <div class="auth-split-image-wrapper">
-        <img src="https://images.unsplash.com/photo-1576610616656-570049f18d9c?w=600&q=80" alt="Swimming pool" class="auth-split-image" />
-        <div class="auth-split-overlay">
-          <div class="auth-split-content">
-            <svg class="auth-split-logo" width="32" height="20" viewBox="0 0 28 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M2 5C5 2 8 8 11 5C14 2 17 8 20 5C23 2 26 8 26 5" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round"/>
-              <path d="M2 11C5 8 8 14 11 11C14 8 17 14 20 11C23 8 26 14 26 11" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round"/>
-              <path d="M2 17C5 14 8 20 11 17C14 14 17 20 20 17C23 14 26 20 26 17" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round"/>
-            </svg>
-            <h2 class="auth-split-title">Experience the elite standard.</h2>
-            <p class="auth-split-subtitle">Access world-class facilities, personalized training, and a community of water enthusiasts.</p>
-            
-            <div class="auth-split-feature">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-              </svg>
-              <span>Secure Access<br><strong>Encrypted member credentials</strong></span>
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">AquaSphere</a>
+            <ul class="nav-links">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+            </ul>
+            <div class="nav-actions">
+                <button class="btn-signin" onclick="window.location.href='auth-member-signup.html'">Sign Up</button>
             </div>
-          </div>
         </div>
-      </div>
-    </div>
+    </nav>
+    
+    <div class="auth-container auth-light">
+        <div class="auth-card">
+            <a href="index.html" class="auth-close-btn" title="Back to home">✕</a>
 
-    <div class="auth-split-right">
-      <div class="auth-split-form-card">
-        <h1 class="auth-split-form-title">Member Login</h1>
-        <p class="auth-split-form-subtitle">Welcome back! Please enter your details.</p>
+            <h1 class="auth-title">Member Login</h1>
+            <p class="auth-subtitle">Welcome back! Please enter your details.</p>
 
-        <form class="auth-form" id="memberLoginForm">
-          <div class="form-group">
-            <label for="memberEmail" class="form-label">EMAIL ADDRESS</label>
-            <div class="form-input-wrapper">
-              <svg class="form-input-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 01-2.06 0L2 7"/>
-              </svg>
-              <input type="email" id="memberEmail" name="email" placeholder="name@example.com" class="form-input" required />
-            </div>
-          </div>
+            <div id="formMessage" class="form-message"></div>
 
-          <div class="form-group">
-            <div class="form-label-row">
-              <label for="memberPassword" class="form-label">PASSWORD</label>
-              <a href="#" class="form-forgot-link">Forgot?</a>
-            </div>
-            <div class="form-input-wrapper">
-              <svg class="form-input-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/>
-              </svg>
-              <input type="password" id="memberPassword" name="password" placeholder="•••••••" class="form-input" required />
-            </div>
-          </div>
+            <form class="auth-form" id="memberLoginForm">
+                <div class="form-group">
+                    <label for="memberEmail" class="form-label">EMAIL ADDRESS</label>
+                    <div class="form-input-wrapper">
+                        <input type="email"
+                               id="memberEmail"
+                               name="email"
+                               class="form-input"
+                               required />
+                    </div>
+                </div>
 
-          <button type="submit" class="auth-split-submit-btn">
-            Sign In to Dashboard
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M5 12h14M12 5l7 7-7 7"/>
-            </svg>
-          </button>
-        </form>
+                <div class="form-group">
+                    <label for="memberPassword" class="form-label">PASSWORD</label>
+                    <div class="form-input-wrapper">
+                        <input type="password"
+                               id="memberPassword"
+                               name="password"
+                               class="form-input"
+                               required />
+                    </div>
+                </div>
 
-        <p class="auth-split-footer">
-          Not a member yet? <a href="auth-member-signup.html" class="auth-link">Join AquaSphere</a>
-        </p>
+                <button type="submit" class="auth-submit-btn auth-submit-btn-large">
+                    Sign In
+                </button>
+            </form>
 
-        <div class="auth-split-portal-links">
-          <a href="auth-staff-login.html" class="portal-link">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M20 7l-1.35-1.35a2 2 0 00-2.83 0L6 16.82a2 2 0 00-.5 2.23L4 20l1.95-.5a2 2 0 002.23-.5L20 9.83a2 2 0 000-2.83z"/><line x1="9" y1="4" x2="4" y2="9"/><line x1="12" y1="2" x2="7" y2="7"/>
-            </svg>
-            STAFF PORTAL
-          </a>
-          <div class="portal-divider">·</div>
-          <a href="auth-admin-login.html" class="portal-link">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-            </svg>
-            ADMIN DASHBOARD
-          </a>
+            <p class="auth-footer-text">
+                Don’t have an account? <a href="auth-member-signup.html" class="auth-link">Create one</a>
+            </p>
         </div>
-      </div>
     </div>
-  </div>
 
-  <script src="auth.js"></script>
+    <script src="auth.js?v=2"></script>
 </body>
 </html>

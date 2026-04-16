@@ -1,13 +1,6 @@
 using System.Security.Cryptography;
 using Microsoft.Data.Sqlite;
 
-class MemberSignupRequest
-{
-    public string? FirstName { get; set; }
-    public string? LastName { get; set; }
-    public string? Email { get; set; }
-    public string? Phone { get; set; }
-    public string? Password { get; set; }
 var builder = WebApplication.CreateBuilder(args);
 var app = builder.Build();
 
@@ -18,6 +11,7 @@ app.UseStaticFiles();
 
 /* ===========================
    MEMBER SIGNUP
+=========================== */
 app.MapPost("/api/member/signup", async (HttpContext context) =>
 {
     var request = await context.Request.ReadFromJsonAsync<MemberSignupRequest>();
@@ -63,6 +57,7 @@ app.MapPost("/api/member/signup", async (HttpContext context) =>
 
 /* ===========================
    MEMBER LOGIN
+=========================== */
 app.MapPost("/api/member/login", async (HttpContext context) =>
 {
     var request = await context.Request.ReadFromJsonAsync<MemberLoginRequest>();
@@ -102,6 +97,7 @@ app.MapPost("/api/member/login", async (HttpContext context) =>
 
 /* ===========================
    STAFF SIGNUP
+=========================== */
 app.MapPost("/api/staff/signup", async (HttpContext context) =>
 {
     var request = await context.Request.ReadFromJsonAsync<StaffRequest>();
@@ -136,6 +132,7 @@ app.MapPost("/api/staff/signup", async (HttpContext context) =>
 
 /* ===========================
    STAFF LOGIN
+=========================== */
 app.MapPost("/api/staff/login", async (HttpContext context) =>
 {
     var request = await context.Request.ReadFromJsonAsync<LoginRequest>();
@@ -160,6 +157,7 @@ app.MapPost("/api/staff/login", async (HttpContext context) =>
 
 /* ===========================
    ADMIN LOGIN
+=========================== */
 app.MapPost("/api/admin/login", async (HttpContext context) =>
 {
     var request = await context.Request.ReadFromJsonAsync<LoginRequest>();
@@ -186,6 +184,7 @@ app.Run();
 
 /* ===========================
    DATABASE SETUP
+=========================== */
 void SetupDatabase()
 {
     using var connection = new SqliteConnection("Data Source=clive_database.db");
@@ -221,6 +220,7 @@ void SetupDatabase()
 
 /* ===========================
    SECURITY
+=========================== */
 string HashPassword(string password)
 {
     byte[] salt = RandomNumberGenerator.GetBytes(16);
@@ -240,6 +240,7 @@ bool VerifyPassword(string password, string stored)
 
 /* ===========================
    MODELS
+=========================== */
 class MemberSignupRequest
 {
     public string FirstName { get; set; }

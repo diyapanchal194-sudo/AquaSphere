@@ -124,10 +124,22 @@ void SetupDatabase()
             Id INTEGER PRIMARY KEY AUTOINCREMENT,
             FirstName TEXT NOT NULL,
             LastName TEXT NOT NULL,
-            Email TEXT UNIQUE NOT NULL,
+            Email TEXT NOT NULL UNIQUE,
             Phone TEXT,
             PasswordHash TEXT NOT NULL,
             JoinDate TEXT NOT NULL
+        );
+
+        CREATE TABLE IF NOT EXISTS Payments (
+            Id INTEGER PRIMARY KEY AUTOINCREMENT,
+            MemberId INTEGER NOT NULL,
+            PlanName TEXT NOT NULL,
+            BillingPeriod TEXT NOT NULL,
+            Amount REAL NOT NULL,
+            PaymentMethod TEXT NOT NULL,
+            PaymentStatus TEXT NOT NULL,
+            PaymentDate TEXT NOT NULL,
+            FOREIGN KEY (MemberId) REFERENCES Members(Id)
         );
     ";
 

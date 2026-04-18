@@ -132,6 +132,122 @@
             cursor: pointer;
         }
 
+        .message-box {
+            display: none;
+            margin: 0 0 20px;
+            padding: 14px 18px;
+            border-radius: 16px;
+            font-size: 0.95rem;
+            font-weight: 600;
+        }
+
+            .message-box.success {
+                display: block;
+                background: #DCFCE7;
+                color: #166534;
+                border: 1px solid #86EFAC;
+            }
+
+            .message-box.error {
+                display: block;
+                background: #FEE2E2;
+                color: #991B1B;
+                border: 1px solid #FCA5A5;
+            }
+
+        .booking-form-card {
+            background: #fff;
+            border: 1px solid #E5E7EB;
+            border-radius: 30px;
+            padding: 28px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.04);
+            margin-bottom: 22px;
+        }
+
+        .booking-form-title {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #4B5563;
+            margin: 0 0 20px;
+        }
+
+        .selected-slot {
+            display: none;
+            margin-bottom: 18px;
+            padding: 14px 16px;
+            background: #EFF6FF;
+            border: 1px solid #BFDBFE;
+            color: #1D4ED8;
+            border-radius: 16px;
+            font-weight: 700;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+            .form-group label {
+                font-size: 0.78rem;
+                font-weight: 700;
+                color: #6B7280;
+                letter-spacing: 0.05em;
+            }
+
+            .form-group select,
+            .form-group input {
+                padding: 14px 16px;
+                border: 1px solid #D1D5DB;
+                border-radius: 16px;
+                font-size: 0.95rem;
+                outline: none;
+                background: #fff;
+                font-family: inherit;
+            }
+
+                .form-group select:focus,
+                .form-group input:focus {
+                    border-color: #2563EB;
+                }
+
+        .form-actions {
+            margin-top: 20px;
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .book-class-btn {
+            background: linear-gradient(135deg, #2563EB, #3B82F6);
+            color: white;
+            border: none;
+            border-radius: 18px;
+            padding: 14px 24px;
+            font-size: 0.95rem;
+            font-weight: 800;
+            cursor: pointer;
+            box-shadow: 0 8px 24px rgba(37, 99, 235, 0.22);
+        }
+
+        .clear-selection-btn {
+            border: 1px solid #E5E7EB;
+            background: #F9FAFB;
+            color: #6B7280;
+            border-radius: 18px;
+            padding: 14px 20px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
         .filters {
             display: flex;
             gap: 14px;
@@ -216,6 +332,7 @@
             font-size: 0.78rem;
             line-height: 1.4;
             box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            margin-bottom: 6px;
         }
 
         .card-blue {
@@ -250,12 +367,28 @@
             background: #F8FAFC;
             border-radius: 14px;
             height: 100%;
+            min-height: 70px;
             cursor: pointer;
+        }
+
+        .slot.selected {
+            background: #EFF6FF;
+            box-shadow: inset 0 0 0 2px #60A5FA;
+        }
+
+        @media (max-width: 1100px) {
+            .form-grid {
+                grid-template-columns: 1fr 1fr;
+            }
         }
 
         @media (max-width: 900px) {
             .title-row {
                 flex-direction: column;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -288,6 +421,8 @@
                 <button class="back-btn" onclick="window.location.href='dashboard.html'">← Back to Portal</button>
             </div>
 
+            <div id="pageMessage" class="message-box"></div>
+
             <div class="filters">
                 <button class="week-nav-btn" id="prevWeekBtn">‹</button>
 
@@ -309,6 +444,59 @@
             </div>
         </section>
 
+        <section class="booking-form-card">
+            <h2 class="booking-form-title">Schedule a Class</h2>
+
+            <div id="selectedSlotInfo" class="selected-slot"></div>
+
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="teacherName">Teacher</label>
+                    <select id="teacherName">
+                        <option value="">Select teacher</option>
+                        <option value="Luke">Luke</option>
+                        <option value="Brandon">Brandon</option>
+                        <option value="Alex">Alex</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="sessionType">Session Type</label>
+                    <select id="sessionType">
+                        <option value="">Select session</option>
+                        <option value="Swimming Lessons">Swimming Lessons</option>
+                        <option value="Private Session">Private Session</option>
+                        <option value="Lane Training">Lane Training</option>
+                        <option value="Beginner Coaching">Beginner Coaching</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="bookingLocation">Location</label>
+                    <select id="bookingLocation">
+                        <option value="">Select location</option>
+                        <option value="London Royal Docks">London Royal Docks</option>
+                        <option value="Manchester MediaCity">Manchester MediaCity</option>
+                        <option value="Birmingham Edgbaston">Birmingham Edgbaston</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="bookingFor">Booking For</label>
+                    <select id="bookingFor">
+                        <option value="">Select option</option>
+                        <option value="For me">For me</option>
+                        <option value="For someone else">For someone else</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <button id="bookClassBtn" class="book-class-btn">Schedule Class</button>
+                <button id="clearSelectionBtn" class="clear-selection-btn" type="button">Clear Selection</button>
+            </div>
+        </section>
+
         <section class="schedule-board">
             <div class="board-grid">
                 <div class="board-head time">TIME</div>
@@ -320,72 +508,52 @@
                 <div class="board-head">Saturday<br><small id="day5">11 Apr</small></div>
 
                 <div class="time-cell">06:00</div>
-                <div class="slot"></div>
-                <div class="slot"><div class="plus-slot">+</div></div>
-                <div class="slot"></div>
-                <div class="slot"></div>
-                <div class="slot"></div>
-                <div class="slot"></div>
+                <div class="slot" data-day="0" data-time="06:00"></div>
+                <div class="slot" data-day="1" data-time="06:00"><div class="plus-slot">+</div></div>
+                <div class="slot" data-day="2" data-time="06:00"></div>
+                <div class="slot" data-day="3" data-time="06:00"></div>
+                <div class="slot" data-day="4" data-time="06:00"></div>
+                <div class="slot" data-day="5" data-time="06:00"></div>
 
                 <div class="time-cell">07:00</div>
-                <div class="slot"></div>
-                <div class="slot"></div>
-                <div class="slot"></div>
-                <div class="slot"></div>
-                <div class="slot"></div>
-                <div class="slot"></div>
+                <div class="slot" data-day="0" data-time="07:00"></div>
+                <div class="slot" data-day="1" data-time="07:00"></div>
+                <div class="slot" data-day="2" data-time="07:00"></div>
+                <div class="slot" data-day="3" data-time="07:00"></div>
+                <div class="slot" data-day="4" data-time="07:00"></div>
+                <div class="slot" data-day="5" data-time="07:00"></div>
 
                 <div class="time-cell">08:00</div>
-                <div class="slot"></div>
-                <div class="slot"></div>
-                <div class="slot"></div>
-                <div class="slot"></div>
-                <div class="slot">
-                    <div class="schedule-card card-blue" data-location="London Royal Docks">
-                        <div class="schedule-name">James Cooper</div>
-                        <div class="schedule-meta">Swimming Lessons</div>
-                        <div class="schedule-meta">London Royal Docks</div>
-                        <div class="schedule-meta">10/12</div>
-                    </div>
-                </div>
-                <div class="slot"></div>
+                <div class="slot" data-day="0" data-time="08:00"></div>
+                <div class="slot" data-day="1" data-time="08:00"></div>
+                <div class="slot" data-day="2" data-time="08:00"></div>
+                <div class="slot" data-day="3" data-time="08:00"></div>
+                <div class="slot" data-day="4" data-time="08:00"></div>
+                <div class="slot" data-day="5" data-time="08:00"></div>
 
                 <div class="time-cell">09:00</div>
-                <div class="slot">
-                    <div class="schedule-card card-blue" data-location="London Royal Docks">
-                        <div class="schedule-name">Emily Watson</div>
-                        <div class="schedule-meta">Swimming Lessons</div>
-                        <div class="schedule-meta">London Royal Docks</div>
-                        <div class="schedule-meta">8/12</div>
-                    </div>
-                </div>
-                <div class="slot"></div>
-                <div class="slot">
-                    <div class="schedule-card card-green" data-location="London Royal Docks">
-                        <div class="schedule-name">Emily Watson</div>
-                        <div class="schedule-meta">Private Session</div>
-                        <div class="schedule-meta">London Royal Docks</div>
-                        <div class="schedule-meta">3/4</div>
-                    </div>
-                </div>
-                <div class="slot"></div>
-                <div class="slot"></div>
-                <div class="slot"></div>
+                <div class="slot" data-day="0" data-time="09:00"></div>
+                <div class="slot" data-day="1" data-time="09:00"></div>
+                <div class="slot" data-day="2" data-time="09:00"></div>
+                <div class="slot" data-day="3" data-time="09:00"></div>
+                <div class="slot" data-day="4" data-time="09:00"></div>
+                <div class="slot" data-day="5" data-time="09:00"></div>
 
                 <div class="time-cell">10:00</div>
-                <div class="slot"></div>
-                <div class="slot">
-                    <div class="schedule-card card-blue" data-location="Manchester MediaCity">
-                        <div class="schedule-name">Sarah Mitchell</div>
-                        <div class="schedule-meta">Swimming Lessons</div>
-                        <div class="schedule-meta">Manchester MediaCity</div>
-                        <div class="schedule-meta">7/10</div>
-                    </div>
-                </div>
-                <div class="slot"></div>
-                <div class="slot"></div>
-                <div class="slot"></div>
-                <div class="slot"></div>
+                <div class="slot" data-day="0" data-time="10:00"></div>
+                <div class="slot" data-day="1" data-time="10:00"></div>
+                <div class="slot" data-day="2" data-time="10:00"></div>
+                <div class="slot" data-day="3" data-time="10:00"></div>
+                <div class="slot" data-day="4" data-time="10:00"></div>
+                <div class="slot" data-day="5" data-time="10:00"></div>
+
+                <div class="time-cell">11:00</div>
+                <div class="slot" data-day="0" data-time="11:00"></div>
+                <div class="slot" data-day="1" data-time="11:00"></div>
+                <div class="slot" data-day="2" data-time="11:00"></div>
+                <div class="slot" data-day="3" data-time="11:00"></div>
+                <div class="slot" data-day="4" data-time="11:00"></div>
+                <div class="slot" data-day="5" data-time="11:00"></div>
             </div>
         </section>
     </main>
@@ -397,18 +565,28 @@
         }
 
         const locationFilter = document.getElementById("locationFilter");
-        const cards = document.querySelectorAll(".schedule-card");
-
-        locationFilter.addEventListener("change", function () {
-            const value = locationFilter.value;
-
-            cards.forEach(function (card) {
-                const cardLocation = card.getAttribute("data-location");
-                card.style.display = (value === "all" || value === cardLocation) ? "block" : "none";
-            });
-        });
+        const pageMessage = document.getElementById("pageMessage");
+        const selectedSlotInfo = document.getElementById("selectedSlotInfo");
+        const teacherName = document.getElementById("teacherName");
+        const sessionType = document.getElementById("sessionType");
+        const bookingLocation = document.getElementById("bookingLocation");
+        const bookingFor = document.getElementById("bookingFor");
+        const bookClassBtn = document.getElementById("bookClassBtn");
+        const clearSelectionBtn = document.getElementById("clearSelectionBtn");
 
         let weekOffset = 0;
+        let allBookings = [];
+        let selectedSlot = null;
+
+        function showMessage(message, type) {
+            pageMessage.textContent = message;
+            pageMessage.className = "message-box " + type;
+        }
+
+        function clearMessage() {
+            pageMessage.textContent = "";
+            pageMessage.className = "message-box";
+        }
 
         function getMonday(baseDate) {
             const date = new Date(baseDate);
@@ -423,24 +601,218 @@
             return date.toLocaleDateString('en-GB', { day: 'numeric', month: 'short' });
         }
 
+        function dayName(dayIndex) {
+            const names = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+            return names[dayIndex] || "";
+        }
+
         function updateWeekDisplay() {
             const today = new Date();
             const monday = getMonday(today);
             monday.setDate(monday.getDate() + (weekOffset * 7));
 
-            const dates = [];
             for (let i = 0; i < 6; i++) {
                 const d = new Date(monday);
                 d.setDate(monday.getDate() + i);
-                dates.push(d);
                 document.getElementById('day' + i).textContent = formatShort(d);
             }
 
             const sunday = new Date(monday);
             sunday.setDate(monday.getDate() + 6);
+
             document.getElementById('weekRangeText').textContent =
                 formatShort(monday) + ' - ' + formatShort(sunday) + ' ' + sunday.getFullYear();
         }
+
+        function getCardClass(sessionTypeValue) {
+            const text = (sessionTypeValue || "").toLowerCase();
+            if (text.includes("private")) return "card-green";
+            return "card-blue";
+        }
+
+        function createBookingCard(booking) {
+            const card = document.createElement("div");
+            card.className = "schedule-card " + getCardClass(booking.sessionType);
+
+            const name = document.createElement("div");
+            name.className = "schedule-name";
+            name.textContent = booking.teacherName;
+
+            const type = document.createElement("div");
+            type.className = "schedule-meta";
+            type.textContent = booking.sessionType;
+
+            const location = document.createElement("div");
+            location.className = "schedule-meta";
+            location.textContent = booking.location;
+
+            const bookedFor = document.createElement("div");
+            bookedFor.className = "schedule-meta";
+            bookedFor.textContent = booking.bookingFor || "";
+
+            card.setAttribute("data-location", booking.location);
+
+            card.appendChild(name);
+            card.appendChild(type);
+            card.appendChild(location);
+            if (booking.bookingFor) card.appendChild(bookedFor);
+
+            return card;
+        }
+
+        function clearSlots() {
+            const slots = document.querySelectorAll(".slot");
+            slots.forEach(function (slot) {
+                slot.classList.remove("selected");
+                slot.innerHTML = '<div class="plus-slot">+</div>';
+            });
+        }
+
+        function renderBookings() {
+            clearSlots();
+
+            const selectedLocation = locationFilter.value;
+
+            allBookings.forEach(function (booking) {
+                if (selectedLocation !== "all" && booking.location !== selectedLocation) {
+                    return;
+                }
+
+                const slot = document.querySelector(
+                    '.slot[data-day="' + booking.dayOfWeek + '"][data-time="' + booking.startTime + '"]'
+                );
+
+                if (slot) {
+                    slot.innerHTML = "";
+                    slot.appendChild(createBookingCard(booking));
+                }
+            });
+
+            attachSlotHandlers();
+            if (selectedSlot) {
+                const selectedElement = document.querySelector(
+                    '.slot[data-day="' + selectedSlot.dayOfWeek + '"][data-time="' + selectedSlot.startTime + '"]'
+                );
+                if (selectedElement) selectedElement.classList.add("selected");
+            }
+        }
+
+        function attachSlotHandlers() {
+            document.querySelectorAll(".slot").forEach(function (slot) {
+                slot.onclick = function () {
+                    document.querySelectorAll(".slot").forEach(function (s) {
+                        s.classList.remove("selected");
+                    });
+
+                    slot.classList.add("selected");
+
+                    selectedSlot = {
+                        dayOfWeek: parseInt(slot.getAttribute("data-day"), 10),
+                        startTime: slot.getAttribute("data-time")
+                    };
+
+                    selectedSlotInfo.style.display = "block";
+                    selectedSlotInfo.textContent =
+                        "Selected slot: " + dayName(selectedSlot.dayOfWeek) + " at " + selectedSlot.startTime;
+
+                    clearMessage();
+                };
+            });
+        }
+
+        function clearSelection() {
+            selectedSlot = null;
+            document.querySelectorAll(".slot").forEach(function (slot) {
+                slot.classList.remove("selected");
+            });
+            selectedSlotInfo.style.display = "none";
+            selectedSlotInfo.textContent = "";
+            teacherName.value = "";
+            sessionType.value = "";
+            bookingLocation.value = "";
+            bookingFor.value = "";
+            clearMessage();
+        }
+
+        async function loadBookings() {
+            try {
+                const response = await fetch("/api/schedule/bookings");
+                if (!response.ok) {
+                    throw new Error("Failed to load bookings");
+                }
+
+                const bookings = await response.json();
+
+                allBookings = bookings.map(function (b) {
+                    return {
+                        id: b.id,
+                        teacherName: b.teacherName || b.TeacherName || "",
+                        sessionType: b.sessionType || b.SessionType || "",
+                        location: b.location || b.Location || "",
+                        dayOfWeek: b.dayOfWeek ?? b.DayOfWeek,
+                        startTime: b.startTime || b.StartTime || "",
+                        bookingFor: b.bookingFor || b.BookingFor || ""
+                    };
+                });
+
+                renderBookings();
+            } catch (error) {
+                console.error(error);
+                renderBookings();
+            }
+        }
+
+        bookClassBtn.addEventListener("click", async function () {
+            clearMessage();
+
+            if (!selectedSlot) {
+                showMessage("Please select a day and time slot first.", "error");
+                return;
+            }
+
+            if (!teacherName.value || !sessionType.value || !bookingLocation.value || !bookingFor.value) {
+                showMessage("Please choose teacher, session type, location, and booking option.", "error");
+                return;
+            }
+
+            try {
+                const response = await fetch("/api/schedule/book", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        teacherName: teacherName.value,
+                        sessionType: sessionType.value,
+                        location: bookingLocation.value,
+                        dayOfWeek: selectedSlot.dayOfWeek,
+                        startTime: selectedSlot.startTime,
+                        bookingFor: bookingFor.value
+                    })
+                });
+
+                if (!response.ok) {
+                    const errorText = await response.text();
+                    showMessage("Booking failed: " + errorText, "error");
+                    return;
+                }
+
+                await loadBookings();
+                showMessage("Thank you, your class has been scheduled.", "success");
+                clearSelection();
+            } catch (error) {
+                console.error(error);
+                showMessage("Something went wrong while scheduling the class.", "error");
+            }
+        });
+
+        clearSelectionBtn.addEventListener("click", function () {
+            clearSelection();
+        });
+
+        locationFilter.addEventListener("change", function () {
+            renderBookings();
+        });
 
         document.getElementById('prevWeekBtn').addEventListener('click', function () {
             weekOffset--;
@@ -453,6 +825,7 @@
         });
 
         updateWeekDisplay();
+        loadBookings();
     </script>
 </body>
 </html>

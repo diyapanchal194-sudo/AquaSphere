@@ -198,6 +198,8 @@ img {
   align-items: center;
   gap: 8px;
   flex-shrink: 0;
+  position: absolute;
+  right: 24px;
 }
 
 .btn-portal {

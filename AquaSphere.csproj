@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <!-- Target .NET 8 (Long Term Support) -->
+    <TargetFramework>net8.0</TargetFramework>
+    <!-- Nullable reference type warnings enabled -->
+    <Nullable>enable</Nullable>
+    <!-- Implicit usings for cleaner Program.cs -->
+    <ImplicitUsings>enable</ImplicitUsings>
+    <RootNamespace>AquaSphere</RootNamespace>
+    <AssemblyName>AquaSphere</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Data.SqlClient" Version="7.0.0" />
+    <PackageReference Include="Microsoft.Data.Sqlite" Version="10.0.6" />
+  </ItemGroup>
+
+</Project>

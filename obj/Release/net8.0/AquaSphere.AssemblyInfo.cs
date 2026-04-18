@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("AquaSphere")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e088bb234a5b83ef19e51081c9e179b2eb55d42f")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ce5e67ad46daa5a6a93fe0e106055906ffa8c8b2")]
 [assembly: System.Reflection.AssemblyProductAttribute("AquaSphere")]
 [assembly: System.Reflection.AssemblyTitleAttribute("AquaSphere")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

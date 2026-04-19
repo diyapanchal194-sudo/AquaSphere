@@ -158,11 +158,6 @@ function scrollToSection(sectionId) {
     var membershipLocation = document.getElementById('membershipLocation');
     if (membershipLocation) { membershipLocation.textContent = data.membershipLabel; }
 
-    /* Update "Join ..." text on all plan buttons */
-    var joinBtns     = document.querySelectorAll('.plan-btn');
-    var locationShort = data.name.replace('AquaSphere ', '').split(' ').slice(0, 2).join(' ');
-    joinBtns.forEach(function (btn) { btn.textContent = 'Join ' + locationShort; });
-
     /* Store directions URL for the Get Directions button */
     window._activeDirectionsUrl = data.directionsUrl;
   }
@@ -318,6 +313,22 @@ function showHomePopup(message) {
    navigate to the signup page.
 =========================== */
 (function initPlanButtons() {
+  // Plan card hover/click effect to move the blue border
+  var planCards = document.querySelectorAll('.plan-card');
+  planCards.forEach(function (card) {
+    card.addEventListener('click', function (e) {
+      if (e.target.tagName.toLowerCase() === 'button') return;
+      planCards.forEach(function (c) { 
+        c.classList.remove('plan-card-featured');
+        var btn = c.querySelector('.plan-btn');
+        if (btn) { btn.classList.remove('plan-btn-primary'); btn.classList.add('plan-btn-outline'); }
+      });
+      this.classList.add('plan-card-featured');
+      var thisBtn = this.querySelector('.plan-btn');
+      if (thisBtn) { thisBtn.classList.remove('plan-btn-outline'); thisBtn.classList.add('plan-btn-primary'); }
+    });
+  });
+
   document.addEventListener('click', function (e) {
     var btn = e.target.closest('#joinStarterBtn, #joinProBtn, #joinEliteBtn');
     if (btn) {
@@ -331,7 +342,13 @@ function showHomePopup(message) {
         localStorage.setItem("selectedPlan", "Elite");
         localStorage.setItem("selectedPrice", "299");
       }
-      window.location.href = 'payment.html';
+
+      const isLoggedIn = localStorage.getItem("aquasphere_customer_logged_in") === "true";
+      if (isLoggedIn) {
+        window.location.href = 'dashboard.html#section-membership'; 
+      } else {
+        window.location.href = 'auth-member-signup.html';
+      }
     }
   });
 })();

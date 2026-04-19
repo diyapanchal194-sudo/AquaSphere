@@ -566,7 +566,7 @@
 <body>
     <header class="dashboard-topbar">
         <div class="topbar-left">
-            <div class="brand">≋ AquaSphere</div>
+            <a href="index.html" class="brand" style="text-decoration:none;">≋ AquaSphere</a>
             <nav class="top-links">
                 <a href="index.html">Home</a>
                 <a href="index.html#locations">Locations</a>
@@ -581,7 +581,7 @@
     <div class="dashboard-shell">
         <aside class="dashboard-sidebar">
             <div>
-                <div class="sidebar-brand">≋ AquaSphere</div>
+                <a href="index.html" class="sidebar-brand" style="text-decoration:none; display: block;">≋ AquaSphere</a>
 
                 <div class="sidebar-nav">
                     <button class="sidebar-btn active" data-section="overview">Dashboard</button>
@@ -821,6 +821,12 @@
                 }
             });
         });
+
+        // check if we got here via a specific link to membership
+        if (window.location.hash === "#section-membership") {
+            const memBtn = document.querySelector(".sidebar-btn[data-section='membership']");
+            if (memBtn) memBtn.click();
+        }
 
         function logout() {
             localStorage.removeItem("aquasphere_customer_logged_in");

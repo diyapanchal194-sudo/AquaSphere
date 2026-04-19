@@ -98,9 +98,8 @@ function scrollToSection(sectionId) {
     }
 
     var joinBtns = document.querySelectorAll('.plan-btn');
-    var locationShort = data.name.replace('AquaSphere ', '').split(' ').slice(0, 2).join(' ');
     joinBtns.forEach(function (btn) {
-      btn.textContent = 'Join ' + locationShort;
+      btn.textContent = 'Join Now';
     });
 
     window._activeDirectionsUrl = data.directionsUrl;

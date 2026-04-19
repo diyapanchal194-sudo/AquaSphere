@@ -11,4 +11,12 @@
     <AssemblyName>AquaSphere</AssemblyName>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Data.Sqlite" Version="10.0.6" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="UnitTest*.cs" />
+  </ItemGroup>
+
 </Project>

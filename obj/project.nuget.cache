@@ -1,8 +1,16 @@
 {
   "version": 2,
-  "dgSpecHash": "HoTriXWetF4=",
+  "dgSpecHash": "GCiuoWBNtHU=",
   "success": true,
-  "projectFilePath": "C:\\Users\\Diya\\Documents\\SoftwareEng\\AquaSphere\\AquaSphere.csproj",
-  "expectedPackageFiles": [],
+  "projectFilePath": "/home/runner/work/AquaSphere/AquaSphere/AquaSphere.csproj",
+  "expectedPackageFiles": [
+    "/home/runner/.nuget/packages/microsoft.data.sqlite/10.0.6/microsoft.data.sqlite.10.0.6.nupkg.sha512",
+    "/home/runner/.nuget/packages/microsoft.data.sqlite.core/10.0.6/microsoft.data.sqlite.core.10.0.6.nupkg.sha512",
+    "/home/runner/.nuget/packages/sqlitepclraw.bundle_e_sqlite3/2.1.11/sqlitepclraw.bundle_e_sqlite3.2.1.11.nupkg.sha512",
+    "/home/runner/.nuget/packages/sqlitepclraw.core/2.1.11/sqlitepclraw.core.2.1.11.nupkg.sha512",
+    "/home/runner/.nuget/packages/sqlitepclraw.lib.e_sqlite3/2.1.11/sqlitepclraw.lib.e_sqlite3.2.1.11.nupkg.sha512",
+    "/home/runner/.nuget/packages/sqlitepclraw.provider.e_sqlite3/2.1.11/sqlitepclraw.provider.e_sqlite3.2.1.11.nupkg.sha512",
+    "/home/runner/.nuget/packages/system.memory/4.5.3/system.memory.4.5.3.nupkg.sha512"
+  ],
   "logs": []
 }

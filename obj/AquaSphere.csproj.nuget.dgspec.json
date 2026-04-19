@@ -1,31 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Diya\\Documents\\SoftwareEng\\AquaSphere\\AquaSphere.csproj": {}
+    "/home/runner/work/AquaSphere/AquaSphere/AquaSphere.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Diya\\Documents\\SoftwareEng\\AquaSphere\\AquaSphere.csproj": {
+    "/home/runner/work/AquaSphere/AquaSphere/AquaSphere.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Diya\\Documents\\SoftwareEng\\AquaSphere\\AquaSphere.csproj",
+        "projectUniqueName": "/home/runner/work/AquaSphere/AquaSphere/AquaSphere.csproj",
         "projectName": "AquaSphere",
-        "projectPath": "C:\\Users\\Diya\\Documents\\SoftwareEng\\AquaSphere\\AquaSphere.csproj",
-        "packagesPath": "C:\\Users\\Diya\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Diya\\Documents\\SoftwareEng\\AquaSphere\\obj\\",
+        "projectPath": "/home/runner/work/AquaSphere/AquaSphere/AquaSphere.csproj",
+        "packagesPath": "/home/runner/.nuget/packages/",
+        "outputPath": "/home/runner/work/AquaSphere/AquaSphere/obj/",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Diya\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "/home/runner/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -44,11 +38,17 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "10.0.100"
+        "SdkAnalysisLevel": "10.0.200"
       },
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
+          "dependencies": {
+            "Microsoft.Data.Sqlite": {
+              "target": "Package",
+              "version": "[10.0.6, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -68,7 +68,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.103/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/10.0.201/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

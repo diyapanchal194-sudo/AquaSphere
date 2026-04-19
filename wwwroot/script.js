@@ -126,13 +126,26 @@ function openDirections() {
 /* ===========================
    GEOLOCATION - Use my location
 =========================== */
+function showScriptPopup(message) {
+    var popup = document.createElement("div");
+    popup.style.cssText = "position:fixed;top:20px;right:20px;background:#323232;color:#fff;padding:15px 25px;border-radius:4px;z-index:9999;box-shadow:0 4px 6px rgba(0,0,0,0.1);font-family:sans-serif;opacity:0;transition:opacity 0.3s ease;";
+    popup.innerText = message;
+    document.body.appendChild(popup);
+    popup.offsetHeight; 
+    popup.style.opacity = "1";
+    setTimeout(function() {
+        popup.style.opacity = "0";
+        setTimeout(function() { popup.remove(); }, 300);
+    }, 3000);
+}
+
 (function initGeolocation() {
   var btn = document.getElementById('useLocationBtn');
   if (!btn) return;
 
   btn.addEventListener('click', function () {
     if (!navigator.geolocation) {
-      alert('Geolocation is not supported by your browser.');
+      showScriptPopup('Geolocation is not supported by your browser.');
       return;
     }
 
@@ -151,7 +164,7 @@ function openDirections() {
         btn.disabled = false;
       },
       function () {
-        alert('Unable to retrieve your location. Please check your browser permissions.');
+        showScriptPopup('Unable to retrieve your location. Please check your browser permissions.');
         btn.textContent = 'Use my current location';
         btn.disabled = false;
       }

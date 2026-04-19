@@ -7,6 +7,22 @@
         adminLogin: document.getElementById('adminLoginForm')
     };
 
+    function showPopupMessage(message) {
+        var popup = document.createElement("div");
+        popup.style.cssText = "position:fixed;top:20px;right:20px;background:#323232;color:#fff;padding:15px 25px;border-radius:4px;z-index:9999;box-shadow:0 4px 6px rgba(0,0,0,0.1);font-family:sans-serif;opacity:0;transition:opacity 0.3s ease;";
+        popup.innerText = message;
+        document.body.appendChild(popup);
+
+        // Trigger reflow and fade in
+        popup.offsetHeight; 
+        popup.style.opacity = "1";
+
+        setTimeout(function() {
+            popup.style.opacity = "0";
+            setTimeout(function() { popup.remove(); }, 300);
+        }, 3000);
+    }
+
     async function submitForm(form, endpoint, payload) {
         var btn = form.querySelector('button[type="submit"]');
         var text = btn.textContent;
@@ -24,14 +40,14 @@
             var result = await res.json();
 
             if (!res.ok) {
-                alert(result.message || "Error");
+                showPopupMessage(result.message || "Error");
                 return;
             }
 
-            alert(result.message);
+            showPopupMessage(result.message);
             form.reset();
         } catch (err) {
-            alert("Server error");
+            showPopupMessage("Server error");
         } finally {
             btn.disabled = false;
             btn.textContent = text;

@@ -74,12 +74,40 @@
             background: linear-gradient(135deg,#2563EB,#3B82F6);
             color: white;
         }
+
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #6B7280;
+            font-weight: 600;
+            text-decoration: none;
+            margin-bottom: 20px;
+            font-size: 1rem;
+            border: none;
+            background: none;
+            cursor: pointer;
+            padding: 0;
+            transition: color 0.2s;
+            width: auto;
+        }
+
+        .back-button:hover {
+            color: #111827;
+        }
     </style>
 </head>
 
 <body>
 
     <div class="container">
+        <button class="back-button" onclick="history.back()">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="19" y1="12" x2="5" y2="12"></line>
+                <polyline points="12 19 5 12 12 5"></polyline>
+            </svg>
+            Back
+        </button>
         <h1>Choose Your Plan</h1>
         <p>Select the best membership for you</p>
 

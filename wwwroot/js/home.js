@@ -320,6 +320,18 @@ function showHomePopup(message) {
 (function initPlanButtons() {
   document.addEventListener('click', function (e) {
     var btn = e.target.closest('#joinStarterBtn, #joinProBtn, #joinEliteBtn');
-    if (btn) { window.location.href = 'auth-member-signup.html'; }
+    if (btn) {
+      if (btn.id === 'joinStarterBtn') {
+        localStorage.setItem("selectedPlan", "Starter");
+        localStorage.setItem("selectedPrice", "74");
+      } else if (btn.id === 'joinProBtn') {
+        localStorage.setItem("selectedPlan", "Pro");
+        localStorage.setItem("selectedPrice", "149");
+      } else if (btn.id === 'joinEliteBtn') {
+        localStorage.setItem("selectedPlan", "Elite");
+        localStorage.setItem("selectedPrice", "299");
+      }
+      window.location.href = 'payment.html';
+    }
   });
 })();

@@ -192,6 +192,48 @@ app.MapPost("/api/admin/login", async (HttpContext context) =>
 
     return Results.Ok(new { message = "Admin login successful." });
 });
+
+/* ===========================
+   SUBMIT PAYMENT
+=========================== */
+app.MapPost("/api/payment/submit", async (HttpContext context) =>
+{
+    var request = await context.Request.ReadFromJsonAsync<PaymentRequest>();
+
+    if (request == null || string.IsNullOrWhiteSpace(request.Email))
+        return Results.BadRequest(new { message = "Invalid payment data." });
+
+    using var connection = new SqliteConnection("Data Source=clive_database.db");
+    connection.Open();
+
+    var memberCmd = connection.CreateCommand();
+    memberCmd.CommandText = "SELECT Id FROM Members WHERE Email = $email;";
+    memberCmd.Parameters.AddWithValue("$email", request.Email.ToLower());
+    
+    var memberIdObj = memberCmd.ExecuteScalar();
+    if (memberIdObj == null)
+        return Results.BadRequest(new { message = "Member not found. Please log in first." });
+
+    int memberId = Convert.ToInt32(memberIdObj);
+
+    var insertCmd = connection.CreateCommand();
+    insertCmd.CommandText = @"
+        INSERT INTO Payments (MemberId, PlanName, BillingPeriod, Amount, PaymentMethod, PaymentStatus, PaymentDate)
+        VALUES ($memberId, $planName, $billingPeriod, $amount, $paymentMethod, 'Paid', $paymentDate);
+    ";
+    
+    insertCmd.Parameters.AddWithValue("$memberId", memberId);
+    insertCmd.Parameters.AddWithValue("$planName", request.PlanName);
+    insertCmd.Parameters.AddWithValue("$billingPeriod", request.BillingPeriod);
+    insertCmd.Parameters.AddWithValue("$amount", request.Amount);
+    insertCmd.Parameters.AddWithValue("$paymentMethod", request.PaymentMethod);
+    insertCmd.Parameters.AddWithValue("$paymentDate", DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss"));
+
+    insertCmd.ExecuteNonQuery();
+
+    return Results.Ok(new { message = "Payment successful. Thank you for your subscription." });
+});
+
 app.Run();
 
 /* ===========================
@@ -297,4 +339,13 @@ class LoginRequest
 {
     public string? Email { get; set; }
     public string? Password { get; set; }
+}
+
+public class PaymentRequest
+{
+    public string Email { get; set; } = string.Empty;
+    public string PlanName { get; set; } = string.Empty;
+    public string BillingPeriod { get; set; } = string.Empty;
+    public double Amount { get; set; }
+    public string PaymentMethod { get; set; } = string.Empty;
 }

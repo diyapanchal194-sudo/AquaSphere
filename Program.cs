@@ -108,6 +108,90 @@ app.MapPost("/api/member/login", async (HttpContext context) =>
     });
 });
 
+/* ===========================
+   STAFF SIGNUP
+=========================== */
+app.MapPost("/api/staff/signup", async (HttpContext context) =>
+{
+    var request = await context.Request.ReadFromJsonAsync<StaffRequest>();
+
+    if (request == null)
+        return Results.BadRequest(new { message = "Invalid request." });
+
+    using var connection = new SqliteConnection("Data Source=clive_database.db");
+    connection.Open();
+
+    var check = connection.CreateCommand();
+    check.CommandText = "SELECT COUNT(1) FROM Staff WHERE Email = $email;";
+    check.Parameters.AddWithValue("$email", request.Email.ToLower());
+
+    if (Convert.ToInt32(check.ExecuteScalar()) > 0)
+        return Results.BadRequest(new { message = "Staff already exists." });
+
+    var insert = connection.CreateCommand();
+    insert.CommandText = @"
+        INSERT INTO Staff (FullName, Email, PasswordHash)
+        VALUES ($name, $email, $pass);
+    ";
+
+    insert.Parameters.AddWithValue("$name", request.FullName);
+    insert.Parameters.AddWithValue("$email", request.Email.ToLower());
+    insert.Parameters.AddWithValue("$pass", HashPassword(request.Password));
+
+    insert.ExecuteNonQuery();
+
+    return Results.Ok(new { message = "Staff account created." });
+});
+
+/* ===========================
+   STAFF LOGIN
+=========================== */
+app.MapPost("/api/staff/login", async (HttpContext context) =>
+{
+    var request = await context.Request.ReadFromJsonAsync<LoginRequest>();
+
+    using var connection = new SqliteConnection("Data Source=clive_database.db");
+    connection.Open();
+
+    var cmd = connection.CreateCommand();
+    cmd.CommandText = "SELECT * FROM Staff WHERE Email = $email;";
+    cmd.Parameters.AddWithValue("$email", request.Email.ToLower());
+
+    using var reader = cmd.ExecuteReader();
+
+    if (!reader.Read())
+        return Results.BadRequest(new { message = "Invalid login." });
+
+    if (!VerifyPassword(request.Password, reader["PasswordHash"].ToString()))
+        return Results.BadRequest(new { message = "Invalid login." });
+
+    return Results.Ok(new { message = "Staff login successful." });
+});
+
+/* ===========================
+   ADMIN LOGIN
+=========================== */
+app.MapPost("/api/admin/login", async (HttpContext context) =>
+{
+    var request = await context.Request.ReadFromJsonAsync<LoginRequest>();
+
+    using var connection = new SqliteConnection("Data Source=clive_database.db");
+    connection.Open();
+
+    var cmd = connection.CreateCommand();
+    cmd.CommandText = "SELECT * FROM Admins WHERE Email = $email;";
+    cmd.Parameters.AddWithValue("$email", request.Email.ToLower());
+
+    using var reader = cmd.ExecuteReader();
+
+    if (!reader.Read())
+        return Results.BadRequest(new { message = "Invalid admin login." });
+
+    if (!VerifyPassword(request.Password, reader["PasswordHash"].ToString()))
+        return Results.BadRequest(new { message = "Invalid admin login." });
+
+    return Results.Ok(new { message = "Admin login successful." });
+});
 app.Run();
 
 /* ===========================
@@ -197,6 +281,19 @@ class MemberSignupRequest
 }
 
 class MemberLoginRequest
+{
+    public string? Email { get; set; }
+    public string? Password { get; set; }
+}
+
+class StaffRequest
+{
+    public string? FullName { get; set; }
+    public string? Email { get; set; }
+    public string? Password { get; set; }
+}
+
+class LoginRequest
 {
     public string? Email { get; set; }
     public string? Password { get; set; }

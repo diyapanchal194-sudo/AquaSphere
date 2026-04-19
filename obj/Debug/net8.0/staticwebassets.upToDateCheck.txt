@@ -5,7 +5,6 @@ wwwroot\auth-staff-login.html
 wwwroot\auth-staff-signup.html
 wwwroot\auth.css
 wwwroot\auth.js
-wwwroot\dashboard.html
 wwwroot\index.html
 wwwroot\js\admin-dashboard.js
 wwwroot\js\app.js
@@ -13,7 +12,5 @@ wwwroot\js\auth.js
 wwwroot\js\home.js
 wwwroot\js\member-dashboard.js
 wwwroot\js\staff-dashboard.js
-wwwroot\payment.html
-wwwroot\schedule.html
 wwwroot\script.js
 wwwroot\styles.css

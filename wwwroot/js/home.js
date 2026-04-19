@@ -320,6 +320,6 @@ function showHomePopup(message) {
 (function initPlanButtons() {
   document.addEventListener('click', function (e) {
     var btn = e.target.closest('#joinStarterBtn, #joinProBtn, #joinEliteBtn');
-    if (btn) { showPage('member-signup'); }
+    if (btn) { window.location.href = 'auth-member-signup.html'; }
   });
 })();

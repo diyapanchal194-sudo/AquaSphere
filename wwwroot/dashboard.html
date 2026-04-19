@@ -574,8 +574,6 @@
         </div>
 
         <div class="topbar-right">
-            <button class="top-pill" onclick="window.location.href='auth-staff-login.html'">STAFF ACCESS</button>
-            <button class="top-pill" onclick="window.location.href='auth-admin-login.html'">ADMIN CONTROL</button>
             <button class="top-dashboard-btn">Dashboard</button>
         </div>
     </header>
@@ -829,6 +827,47 @@
             localStorage.removeItem("aquasphere_customer_name");
             localStorage.removeItem("aquasphere_customer_email");
             window.location.href = "auth-member-login.html";
+        }
+
+        function showPopupMessage(message) {
+            var popup = document.createElement("div");
+            popup.style.cssText = "position:fixed;top:20px;right:20px;background:#323232;color:#fff;padding:15px 25px;border-radius:4px;z-index:9999;box-shadow:0 4px 6px rgba(0,0,0,0.1);font-family:sans-serif;opacity:0;transition:opacity 0.3s ease;";
+            popup.innerText = message;
+            document.body.appendChild(popup);
+            popup.offsetHeight; 
+            popup.style.opacity = "1";
+            setTimeout(function() {
+                popup.style.opacity = "0";
+                setTimeout(function() { popup.remove(); }, 300);
+            }, 3000);
+        }
+
+        document.querySelectorAll('.cancel-link').forEach(function(link) {
+            link.addEventListener('click', function() {
+                // simple custom confirmation for now, simulating a toast notification after cancellation
+                const item = this.closest('.booking-item');
+                if (item) {
+                    item.style.opacity = '0.5';
+                    item.style.pointerEvents = 'none';
+                    this.textContent = 'CANCELLED';
+                    this.style.color = '#9ca3af';
+                    this.style.cursor = 'default';
+                }
+                showPopupMessage('Booking cancelled successfully.');
+            });
+        });
+
+        document.querySelectorAll('.panel-footer-btn').forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                showPopupMessage(this.textContent.trim() + ' feature is coming soon.');
+            });
+        });
+
+        const bookBtn = document.querySelector('.primary-action-btn');
+        if (bookBtn) {
+            bookBtn.addEventListener('click', function() {
+                window.location.href = 'schedule.html';
+            });
         }
     </script>
 </body>

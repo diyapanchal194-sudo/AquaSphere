@@ -1,0 +1,3 @@
+C:\Users\ashut\source\repos\AquaSphere\wwwroot\auth-admin-login.html
+C:\Users\ashut\source\repos\AquaSphere\wwwroot\auth-staff-login.html
+C:\Users\ashut\source\repos\AquaSphere\wwwroot\auth-staff-signup.html

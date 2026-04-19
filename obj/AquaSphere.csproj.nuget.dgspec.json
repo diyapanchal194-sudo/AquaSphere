@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Diya\\Documents\\SoftwareEng\\AquaSphere\\AquaSphere.csproj": {}
+    "C:\\Users\\ashut\\source\\repos\\AquaSphere\\AquaSphere.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Diya\\Documents\\SoftwareEng\\AquaSphere\\AquaSphere.csproj": {
+    "C:\\Users\\ashut\\source\\repos\\AquaSphere\\AquaSphere.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Diya\\Documents\\SoftwareEng\\AquaSphere\\AquaSphere.csproj",
+        "projectUniqueName": "C:\\Users\\ashut\\source\\repos\\AquaSphere\\AquaSphere.csproj",
         "projectName": "AquaSphere",
-        "projectPath": "C:\\Users\\Diya\\Documents\\SoftwareEng\\AquaSphere\\AquaSphere.csproj",
-        "packagesPath": "C:\\Users\\Diya\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Diya\\Documents\\SoftwareEng\\AquaSphere\\obj\\",
+        "projectPath": "C:\\Users\\ashut\\source\\repos\\AquaSphere\\AquaSphere.csproj",
+        "packagesPath": "C:\\Users\\ashut\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\ashut\\source\\repos\\AquaSphere\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Diya\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\ashut\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -44,11 +44,17 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "10.0.100"
+        "SdkAnalysisLevel": "10.0.200"
       },
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
+          "dependencies": {
+            "Microsoft.Data.Sqlite": {
+              "target": "Package",
+              "version": "[10.0.6, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -60,6 +66,24 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[8.0.25, 8.0.25]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Host.win-x64",
+              "version": "[8.0.25, 8.0.25]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Ref",
+              "version": "[8.0.25, 8.0.25]"
+            },
+            {
+              "name": "Microsoft.WindowsDesktop.App.Ref",
+              "version": "[8.0.25, 8.0.25]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.AspNetCore.App": {
               "privateAssets": "none"
@@ -68,7 +92,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.103/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.201/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

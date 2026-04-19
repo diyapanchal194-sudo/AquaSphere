@@ -158,11 +158,6 @@ function scrollToSection(sectionId) {
     var membershipLocation = document.getElementById('membershipLocation');
     if (membershipLocation) { membershipLocation.textContent = data.membershipLabel; }
 
-    /* Update "Join ..." text on all plan buttons */
-    var joinBtns     = document.querySelectorAll('.plan-btn');
-    var locationShort = data.name.replace('AquaSphere ', '').split(' ').slice(0, 2).join(' ');
-    joinBtns.forEach(function (btn) { btn.textContent = 'Join ' + locationShort; });
-
     /* Store directions URL for the Get Directions button */
     window._activeDirectionsUrl = data.directionsUrl;
   }
@@ -197,6 +192,19 @@ function openDirections() {
    button centres the map on
    the user's position.
 =========================== */
+function showHomePopup(message) {
+    var popup = document.createElement("div");
+    popup.style.cssText = "position:fixed;top:20px;right:20px;background:#323232;color:#fff;padding:15px 25px;border-radius:4px;z-index:9999;box-shadow:0 4px 6px rgba(0,0,0,0.1);font-family:sans-serif;opacity:0;transition:opacity 0.3s ease;";
+    popup.innerText = message;
+    document.body.appendChild(popup);
+    popup.offsetHeight; 
+    popup.style.opacity = "1";
+    setTimeout(function() {
+        popup.style.opacity = "0";
+        setTimeout(function() { popup.remove(); }, 300);
+    }, 3000);
+}
+
 (function initGeolocation() {
   document.addEventListener('click', function (e) {
     if (!e.target.closest('#useLocationBtn')) { return; }
@@ -204,7 +212,7 @@ function openDirections() {
     if (!btn) { return; }
 
     if (!navigator.geolocation) {
-      alert('Geolocation is not supported by your browser.');
+      showHomePopup('Geolocation is not supported by your browser.');
       return;
     }
 
@@ -223,7 +231,7 @@ function openDirections() {
         btn.disabled    = false;
       },
       function () {
-        alert('Unable to retrieve your location. Please check your browser permissions.');
+        showHomePopup('Unable to retrieve your location. Please check your browser permissions.');
         btn.textContent = 'Use my current location';
         btn.disabled    = false;
       }
@@ -305,8 +313,42 @@ function openDirections() {
    navigate to the signup page.
 =========================== */
 (function initPlanButtons() {
+  // Plan card hover/click effect to move the blue border
+  var planCards = document.querySelectorAll('.plan-card');
+  planCards.forEach(function (card) {
+    card.addEventListener('click', function (e) {
+      if (e.target.tagName.toLowerCase() === 'button') return;
+      planCards.forEach(function (c) { 
+        c.classList.remove('plan-card-featured');
+        var btn = c.querySelector('.plan-btn');
+        if (btn) { btn.classList.remove('plan-btn-primary'); btn.classList.add('plan-btn-outline'); }
+      });
+      this.classList.add('plan-card-featured');
+      var thisBtn = this.querySelector('.plan-btn');
+      if (thisBtn) { thisBtn.classList.remove('plan-btn-outline'); thisBtn.classList.add('plan-btn-primary'); }
+    });
+  });
+
   document.addEventListener('click', function (e) {
     var btn = e.target.closest('#joinStarterBtn, #joinProBtn, #joinEliteBtn');
-    if (btn) { showPage('member-signup'); }
+    if (btn) {
+      if (btn.id === 'joinStarterBtn') {
+        localStorage.setItem("selectedPlan", "Starter");
+        localStorage.setItem("selectedPrice", "74");
+      } else if (btn.id === 'joinProBtn') {
+        localStorage.setItem("selectedPlan", "Pro");
+        localStorage.setItem("selectedPrice", "149");
+      } else if (btn.id === 'joinEliteBtn') {
+        localStorage.setItem("selectedPlan", "Elite");
+        localStorage.setItem("selectedPrice", "299");
+      }
+
+      const isLoggedIn = localStorage.getItem("aquasphere_customer_logged_in") === "true";
+      if (isLoggedIn) {
+        window.location.href = 'dashboard.html#section-membership'; 
+      } else {
+        window.location.href = 'auth-member-signup.html';
+      }
+    }
   });
 })();

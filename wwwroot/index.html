@@ -14,7 +14,7 @@
   <!-- NAVBAR -->
   <nav class="navbar" id="navbar">
     <div class="nav-container">
-      <a href="/" class="nav-logo">
+      <a href="index.html" class="nav-logo">
         <svg class="logo-icon" width="28" height="18" viewBox="0 0 28 18" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M2 5C5 2 8 8 11 5C14 2 17 8 20 5C23 2 26 8 26 5" stroke="#2563EB" stroke-width="2.5" stroke-linecap="round"/>
           <path d="M2 11C5 8 8 14 11 11C14 8 17 14 20 11C23 8 26 14 26 11" stroke="#2563EB" stroke-width="2.5" stroke-linecap="round"/>
@@ -25,7 +25,7 @@
 
       <ul class="nav-links">
         <li>
-          <a href="/" class="nav-link active">
+          <a href="index.html" class="nav-link active">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
             </svg>
@@ -33,7 +33,7 @@
           </a>
         </li>
         <li>
-          <a href="#" class="nav-link">
+          <a href="#locations" class="nav-link" onclick="scrollToSection('locations'); return false;">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/>
             </svg>
@@ -43,8 +43,6 @@
       </ul>
 
       <div class="nav-actions">
-        <button class="btn-portal" onclick="window.location.href='auth-staff-login.html'">Staff Access</button>
-        <button class="btn-portal" onclick="window.location.href='auth-admin-login.html'">Admin Control</button>
         <button class="btn-signin" onclick="window.location.href='auth-member-login.html'">Sign In</button>
       </div>
 
@@ -55,10 +53,8 @@
 
     <!-- Mobile Menu -->
     <div class="mobile-menu" id="mobileMenu">
-      <a href="/" class="mobile-link active">Home</a>
-      <a href="#" class="mobile-link">Locations</a>
-      <a href="#" class="mobile-link">Staff Access</a>
-      <a href="#" class="mobile-link">Admin Control</a>
+      <a href="index.html" class="mobile-link active">Home</a>
+      <a href="#locations" class="mobile-link" onclick="scrollToSection('locations'); return false;">Locations</a>
       <a href="#" class="mobile-link mobile-signin">Sign In</a>
     </div>
   </nav>
@@ -246,7 +242,6 @@
     <div class="container">
       <div class="membership-header">
         <h2 class="membership-title">Membership Plans</h2>
-        <p class="membership-location" id="membershipLocation">LOCATION: AQUASPHERE LONDON ROYAL DOCKS</p>
         <p class="membership-subtitle">Choose the perfect tier for your swimming goals. Pricing is adjusted based on your selected facility.</p>
       </div>
 
@@ -265,7 +260,7 @@
             <li><span class="check-icon">&#10003;</span> Weekend access</li>
             <li><span class="check-icon">&#10003;</span> Free towels</li>
           </ul>
-          <button class="plan-btn plan-btn-outline" id="joinStarterBtn">Join Docks</button>
+          <button class="plan-btn plan-btn-outline" id="joinStarterBtn">Join Now</button>
         </div>
 
         <div class="plan-card plan-card-featured">
@@ -283,7 +278,7 @@
             <li><span class="check-icon check-blue">&#10003;</span> Premium sauna access</li>
             <li><span class="check-icon check-blue">&#10003;</span> Priority lane access</li>
           </ul>
-          <button class="plan-btn plan-btn-primary" id="joinProBtn">Join Docks</button>
+          <button class="plan-btn plan-btn-primary" id="joinProBtn">Join Now</button>
         </div>
 
         <div class="plan-card">
@@ -300,7 +295,7 @@
             <li><span class="check-icon">&#10003;</span> Exclusive VIP lounge</li>
             <li><span class="check-icon">&#10003;</span> Free entry for family</li>
           </ul>
-          <button class="plan-btn plan-btn-outline" id="joinEliteBtn">Join Docks</button>
+          <button class="plan-btn plan-btn-outline" id="joinEliteBtn">Join Now</button>
         </div>
 
       </div>
@@ -360,7 +355,7 @@
         <p class="cta-subtitle">
           Join over 5,000 members enjoying premium swimming facilities and world-class training.
         </p>
-        <button class="btn-cta" onclick="window.location.href='#'">Create Free Account</button>
+        <button class="btn-cta" onclick="window.location.href='auth-member-signup.html'">Create Free Account</button>
       </div>
     </div>
   </section>
@@ -371,7 +366,7 @@
       <div class="footer-top">
 
         <div class="footer-brand">
-          <a href="/" class="nav-logo footer-logo">
+          <a href="index.html" class="nav-logo footer-logo">
             <svg class="logo-icon" width="28" height="18" viewBox="0 0 28 18" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M2 5C5 2 8 8 11 5C14 2 17 8 20 5C23 2 26 8 26 5" stroke="#2563EB" stroke-width="2.5" stroke-linecap="round"/>
               <path d="M2 11C5 8 8 14 11 11C14 8 17 14 20 11C23 8 26 14 26 11" stroke="#2563EB" stroke-width="2.5" stroke-linecap="round"/>
@@ -387,9 +382,7 @@
         <div class="footer-col">
           <h4 class="footer-heading">Portals</h4>
           <ul class="footer-links">
-            <li><a href="#">Join Now</a></li>
-            <li><a href="#">Staff Portal</a></li>
-            <li><a href="#">Admin Dashboard</a></li>
+            <li><a href="auth-member-signup.html">Join Now</a></li>
           </ul>
         </div>
 

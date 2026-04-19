@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AquaSphere - Secure Payment</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { margin: 0; font-family: 'Inter', sans-serif; background: #F8FAFC; color: #111827; }
+        .payment-container { max-width: 600px; margin: 60px auto; padding: 30px; background: white; border-radius: 20px; box-shadow: 0 8px 20px rgba(0,0,0,0.05); }
+        .payment-header { text-align: center; margin-bottom: 30px; }
+        .payment-title { font-size: 2rem; font-weight: 800; color: #2563EB; margin-bottom: 10px; }
+        .payment-summary { background: #EEF2FF; padding: 20px; border-radius: 12px; margin-bottom: 30px; display: flex; justify-content: space-between; align-items: center; }
+        .summary-label { font-size: 0.9rem; color: #4B5563; font-weight: 600; }
+        .summary-value { font-size: 1.5rem; font-weight: 800; color: #111827; }
+        .form-group { margin-bottom: 20px; }
+        .form-label { display: block; font-size: 0.85rem; font-weight: 700; color: #6B7280; margin-bottom: 8px; }
+        .form-input { width: 100%; box-sizing: border-box; padding: 14px; border: 1px solid #D1D5DB; border-radius: 10px; font-size: 1rem; }
+        .payment-btn { width: 100%; padding: 16px; background: linear-gradient(135deg, #2563EB, #3B82F6); color: white; border: none; border-radius: 12px; font-size: 1.1rem; font-weight: 700; cursor: pointer; box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2); }
+        .payment-btn:disabled { opacity: 0.7; cursor: not-allowed; }
+        .two-col { display: flex; gap: 15px; }
+        .two-col > div { flex: 1; }
+        .back-button { display: inline-flex; align-items: center; gap: 8px; color: #6B7280; font-weight: 600; text-decoration: none; margin-bottom: 20px; font-size: 1rem; border: none; background: none; cursor: pointer; padding: 0; transition: color 0.2s; }
+        .back-button:hover { color: #111827; }
+    </style>
+</head>
+<body>
+    <div class="payment-container">
+        <button class="back-button" onclick="history.back()">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="19" y1="12" x2="5" y2="12"></line>
+                <polyline points="12 19 5 12 12 5"></polyline>
+            </svg>
+            Back
+        </button>
+        <div class="payment-header">
+            <div class="payment-title">Secure Checkout</div>
+            <p>Complete your AquaSphere membership</p>
+        </div>
+
+        <div class="payment-summary">
+            <div>
+                <div class="summary-label">Selected Plan</div>
+                <div class="summary-value" id="planNameDisplay">Starter</div>
+            </div>
+            <div style="text-align: right;">
+                <div class="summary-label">Amount Due</div>
+                <div class="summary-value" id="planPriceDisplay">£74.00</div>
+            </div>
+        </div>
+
+        <form id="paymentForm">
+            <div class="form-group">
+                <label class="form-label">CARDHOLDER NAME</label>
+                <input type="text" class="form-input" id="cardName" required placeholder="John Doe">
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">CARD NUMBER</label>
+                <input type="text" class="form-input" id="cardNumber" required placeholder="0000 0000 0000 0000" maxlength="19">
+            </div>
+
+            <div class="two-col">
+                <div class="form-group">
+                    <label class="form-label">EXPIRY DATE</label>
+                    <input type="text" class="form-input" id="cardExpiry" required placeholder="MM/YY" maxlength="5">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">CVC</label>
+                    <input type="text" class="form-input" id="cardCvc" required placeholder="123" maxlength="4">
+                </div>
+            </div>
+
+            <button type="submit" class="payment-btn" id="submitBtn">Pay Securely</button>
+        </form>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const plan = localStorage.getItem("selectedPlan") || "Starter";
+            const price = localStorage.getItem("selectedPrice") || "74";
+            
+            document.getElementById("planNameDisplay").textContent = plan;
+            document.getElementById("planPriceDisplay").textContent = `£${price}.00`;
+        });
+
+        // formatting card number
+        document.getElementById('cardNumber').addEventListener('input', function (e) {
+            let val = e.target.value.replace(/\D/g, '');
+            val = val.replace(/(.{4})/g, '$1 ').trim();
+            e.target.value = val;
+        });
+
+        document.getElementById('cardExpiry').addEventListener('input', function (e) {
+            let val = e.target.value.replace(/\D/g, '');
+            if (val.length > 2) val = val.substring(0, 2) + '/' + val.substring(2);
+            e.target.value = val;
+        });
+
+        function showPopupMessage(message) {
+            var popup = document.createElement("div");
+            popup.style.cssText = "position:fixed;top:20px;right:20px;background:#323232;color:#fff;padding:15px 25px;border-radius:4px;z-index:9999;box-shadow:0 4px 6px rgba(0,0,0,0.1);font-family:sans-serif;opacity:0;transition:opacity 0.3s ease;";
+            popup.innerText = message;
+            document.body.appendChild(popup);
+            popup.offsetHeight; 
+            popup.style.opacity = "1";
+            setTimeout(function() {
+                popup.style.opacity = "0";
+                setTimeout(function() { popup.remove(); }, 300);
+            }, 3000);
+        }
+
+        document.getElementById('paymentForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const btn = document.getElementById('submitBtn');
+            btn.disabled = true;
+            btn.textContent = "Processing Payment...";
+
+            const email = localStorage.getItem("aquasphere_customer_email");
+            if (!email) {
+                showPopupMessage("You must be logged in to make a payment. Redirecting to login...");
+                setTimeout(() => window.location.href = "auth-member-login.html", 2500);
+                return;
+            }
+
+            const plan = localStorage.getItem("selectedPlan") || "Starter";
+            const amount = parseFloat(localStorage.getItem("selectedPrice") || "74");
+
+            try {
+                const response = await fetch('/api/payment/submit', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        Email: email,
+                        PlanName: plan,
+                        BillingPeriod: "Monthly",
+                        Amount: amount,
+                        PaymentMethod: "Credit Card"
+                    })
+                });
+
+                const result = await response.json();
+
+                if (!response.ok) {
+                    showPopupMessage(result.message || "Payment failed.");
+                    btn.disabled = false;
+                    btn.textContent = "Pay Securely";
+                } else {
+                    showPopupMessage(result.message);
+                    setTimeout(() => window.location.href = "dashboard.html", 2000);
+                }
+
+            } catch (err) {
+                showPopupMessage("Server error during payment.");
+                btn.disabled = false;
+                btn.textContent = "Pay Securely";
+            }
+        });
+    </script>
+</body>
+</html>
